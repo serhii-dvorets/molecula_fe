@@ -1,3 +1,8 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+    "extends": ["next/core-web-vitals", "next/typescript"],
+    "rules": {
+    "object-curly-spacing": ["error", "always"],
+    "indent": ["error", "tab"],
+     "@typescript-eslint/no-explicit-any": "off"
+  }
 }
