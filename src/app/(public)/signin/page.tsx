@@ -1,14 +1,20 @@
 "use client";
 
-import apiSingleton from "@/api/ApiFactory";
 import ActionButton from "@/components/buttons/ActionButton/ActionButton";
 import FormContainer from "@/components/forms/FormContainer";
 import PasswordInput from "@/components/inputs/PasswordInput";
 import TextInput from "@/components/inputs/TextInput";
 import Typography from "@/components/typography/Typography";
+import { useSignIn } from "@/lib/features/hooks/useSignIn";
+import { clearUserErrors, userSelectors } from "@/lib/features/userSlice";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SignInPage() {
+	const { handleSingIn } = useSignIn();
+	const dispatch = useDispatch()
+	const errors = useSelector(userSelectors.errors) 
+
 	const [formData, setFormData] = useState({
 		name: "",
 		phoneNumber: "",
@@ -16,6 +22,7 @@ export default function SignInPage() {
 	});
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		dispatch(clearUserErrors())
 		const { name, value } = e.target;
 		setFormData((prevData) => ({ ...prevData, [name]: value }));
 	};
@@ -23,8 +30,7 @@ export default function SignInPage() {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		const response = await apiSingleton.auth.signIn(formData)
-		console.log('response', response);
+		handleSingIn.mutateAsync(formData)
 	};
 
 	return (
@@ -37,7 +43,7 @@ export default function SignInPage() {
 					value={formData.name}
 					onChange={handleChange}
 					placeholder="Ваше ім'я"
-					required
+					error={errors.name}
 				/>
 				<TextInput
 					label="Номер телефону"
@@ -45,7 +51,7 @@ export default function SignInPage() {
 					value={formData.phoneNumber}
 					onChange={handleChange}
 					placeholder="Ваш номер телефону"
-					required
+					error={errors.phoneNumber}
 				/>
 				<PasswordInput
 					label="Пароль"
@@ -53,7 +59,7 @@ export default function SignInPage() {
 					value={formData.password}
 					onChange={handleChange}
 					placeholder="Ваш пароль"
-					required
+					error={errors.password}
 				/>
 				<ActionButton type="submit">Submit</ActionButton>
 			</FormContainer>

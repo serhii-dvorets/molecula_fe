@@ -41,10 +41,8 @@ class ApiClient {
 				return response;
 			},
 			(error) => {
-				console.log(error);
-				
 				if (error.response.status === 400) {
-					console.log('ERROR');
+					return Promise.reject(error.response.data)
 				}
 
 				if (error.response.status === 401) {
