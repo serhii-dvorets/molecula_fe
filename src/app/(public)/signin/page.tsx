@@ -5,8 +5,8 @@ import FormContainer from "@/components/forms/FormContainer";
 import PasswordInput from "@/components/inputs/PasswordInput";
 import TextInput from "@/components/inputs/TextInput";
 import Typography from "@/components/typography/Typography";
-import { useSignIn } from "@/lib/features/hooks/useSignIn";
-import { clearUserErrors, userSelectors } from "@/lib/features/userSlice";
+import { useSignIn } from "@/lib/features/user/hooks/useSignIn";
+import { clearUserErrors, userSelectors } from "@/lib/features/user/userSlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -29,7 +29,6 @@ export default function SignInPage() {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
 		handleSingIn.mutateAsync(formData)
 	};
 

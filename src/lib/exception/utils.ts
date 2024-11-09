@@ -1,4 +1,4 @@
-import { EXCEPTION_TRANSLATIONS } from "./translations";
+import { EXCEPTION_TRANSLATIONS, FIELDS_TRANSLATIONS } from "./translations";
 import { ValidationException } from "./types";
 
 export const formatException = (exception: ValidationException) => {
@@ -41,8 +41,14 @@ export const getTranslatedValidationError = (field: string, message: string | st
 	const code = message.split(' ').slice(1).toString().replaceAll(',', ' ')
 
 	if (EXCEPTION_TRANSLATIONS[code]) {
-		return EXCEPTION_TRANSLATIONS[code](field)
+		return EXCEPTION_TRANSLATIONS[code](getTranslatedField(field))
 	}
 
 	return message
+}
+
+export const getTranslatedField = (field: string) => {
+	if (FIELDS_TRANSLATIONS[field]) return FIELDS_TRANSLATIONS[field]
+
+	return field
 }

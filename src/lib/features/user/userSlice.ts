@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../store/store'
-import { ValidationException } from '../exception/types'
-import { formatException } from '../exception/utils'
+import { RootState } from '../../store/store'
+import { ValidationException } from '../../exception/types'
+import { formatException } from '../../exception/utils'
 
 export type UserProfile = {
 	id: number,

@@ -2,43 +2,54 @@
 
 import ActionButton from "@/components/buttons/ActionButton/ActionButton";
 import FormContainer from "@/components/forms/FormContainer";
+import PasswordInput from "@/components/inputs/PasswordInput";
 import TextInput from "@/components/inputs/TextInput";
+import Typography from "@/components/typography/Typography";
+import { useLogIn } from "@/lib/features/user/hooks/useLogIn";
+import { clearUserErrors, userSelectors } from "@/lib/features/user/userSlice";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function LoginPage() {
+	const { handleLogIn } = useLogIn();
+	const errors = useSelector(userSelectors.errors)
+
+	const dispatch = useDispatch()
 	const [formData, setFormData] = useState({
-		name: "",
-		email: ""
+		phoneNumber: "",
+		password: ""
 	});
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		dispatch(clearUserErrors())
 		const { name, value } = e.target;
 		setFormData((prevData) => ({ ...prevData, [name]: value }));
 	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log("Form submitted:", formData);
+		handleLogIn.mutateAsync(formData)
 	};
 
 	return (
-		<div className="min-h-screen bg-gray-100 flex items-center justify-center">
-			<FormContainer onSubmit={handleSubmit}>
+		<div className="min-h-screen bg-gray-100 flex flex-col gap-4 items-center justify-center px-4">
+			<Typography variant="headline-medium">Логін</Typography>
+			<FormContainer onSubmit={handleSubmit} className="w-full max-w-[350px]">
 				<TextInput
-					label="Name"
-					name="name"
-					value={formData.name}
+					label="Номер телефону"
+					name="phoneNumber"
+					value={formData.phoneNumber}
 					onChange={handleChange}
-					placeholder="Enter your name"
-					required
+					placeholder="Ваш номер телефону"
+					error={errors.phoneNumber}
 				/>
-				<TextInput
-					label="Email"
-					name="email"
-					value={formData.email}
+				<PasswordInput
+					label="Пароль"
+					name="password"
+					value={formData.password}
 					onChange={handleChange}
-					placeholder="Enter your email"
-					required
+					placeholder="Ваш пароль"
+					error={errors.password}
 				/>
 				<ActionButton type="submit">Submit</ActionButton>
 			</FormContainer>
