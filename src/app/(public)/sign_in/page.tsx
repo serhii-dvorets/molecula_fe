@@ -18,7 +18,8 @@ export default function SignInPage() {
 	const [formData, setFormData] = useState({
 		name: "",
 		phoneNumber: "",
-		password: ""
+		password: "",
+		confirmPassword: ""
 	});
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +60,14 @@ export default function SignInPage() {
 					onChange={handleChange}
 					placeholder="Ваш пароль"
 					error={errors.password}
+				/>
+				<PasswordInput
+					label="Підтвердження паролю"
+					name="confirmPassword"
+					value={formData.confirmPassword}
+					onChange={handleChange}
+					placeholder="Повторіть ваш пароль"
+					error={errors.confirmPassword}
 				/>
 				<ActionButton type="submit">Submit</ActionButton>
 			</FormContainer>

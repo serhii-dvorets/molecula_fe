@@ -9,7 +9,7 @@ export type UserProfile = {
 	name: string,
 	email: string | null,
 	emailConfirmed: boolean,
-	phoneNumber: number,
+	phoneNumber: string,
 	phoneNumberConfirmed: boolean,
 	role: {
 		id: number,

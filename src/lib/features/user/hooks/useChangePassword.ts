@@ -1,27 +1,23 @@
 import apiSingleton from "@/api/ApiFactory";
 import { useMutation } from "@tanstack/react-query";
-import { SignInBody } from "@/api/Auth/types";
+import { ChangePasswordBody } from "@/api/Auth/types";
 import { useDispatch } from "react-redux";
 import { setUserErrors, setUserProfile } from "../userSlice";
 import { redirect } from 'next/navigation'
 import { showToast } from "@/lib/toast/showToast";
 
-export function useSignIn() {
+export function useChangePassword() {
 	const dispatch = useDispatch();
 
 	return {
-		handleSingIn: useMutation({
-			mutationFn: (data: SignInBody) => apiSingleton.auth.signIn(data),
+		handleChangePassword: useMutation({
+			mutationFn: (data: ChangePasswordBody) => apiSingleton.auth.changePassword(data),
 			onSuccess: (data) =>  {
 				dispatch(setUserProfile(data));
-				showToast("success", 'Your post has been published!')
+				showToast("success", 'Пароль успішно змінено!')
 				redirect('/')
 			},
 			onError: (error: any) => {
-				if (error.code === 'USER_REGISTERED_WITHOUT_PASSWORD') {
-					redirect('/set_password_code')
-				}
-
 				if (error?.statusCode === 400 && error?.code && error?.fields){
 					dispatch(setUserErrors(error))
 				}			

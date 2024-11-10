@@ -1,27 +1,25 @@
 import apiSingleton from "@/api/ApiFactory";
 import { useMutation } from "@tanstack/react-query";
-import { SignInBody } from "@/api/Auth/types";
+import { ConfirmCodeBody } from "@/api/Auth/types";
 import { useDispatch } from "react-redux";
 import { setUserErrors, setUserProfile } from "../userSlice";
 import { redirect } from 'next/navigation'
 import { showToast } from "@/lib/toast/showToast";
 
-export function useSignIn() {
+export function useConfirmPhoneNumber() {
 	const dispatch = useDispatch();
 
 	return {
-		handleSingIn: useMutation({
-			mutationFn: (data: SignInBody) => apiSingleton.auth.signIn(data),
+		handleConfirmPhoneNumber: useMutation({
+			mutationFn: (data: ConfirmCodeBody) => apiSingleton.auth.confirmPhoneNumber(data),
 			onSuccess: (data) =>  {
+				console.log('handleConfirmPhoneNumber data', data);
+				
 				dispatch(setUserProfile(data));
-				showToast("success", 'Your post has been published!')
-				redirect('/')
+				showToast("success", 'Ваш номер телефону підтверджено!')
+				redirect('/change_password')
 			},
 			onError: (error: any) => {
-				if (error.code === 'USER_REGISTERED_WITHOUT_PASSWORD') {
-					redirect('/set_password_code')
-				}
-
 				if (error?.statusCode === 400 && error?.code && error?.fields){
 					dispatch(setUserErrors(error))
 				}			
