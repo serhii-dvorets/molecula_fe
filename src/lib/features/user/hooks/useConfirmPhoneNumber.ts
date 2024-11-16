@@ -2,7 +2,7 @@ import apiSingleton from "@/api/ApiFactory";
 import { useMutation } from "@tanstack/react-query";
 import { ConfirmCodeBody } from "@/api/Auth/types";
 import { useDispatch } from "react-redux";
-import { setUserErrors, setUserProfile } from "../userSlice";
+import { setUserErrors, setUserProfile } from "../../../store/slices/userSlice";
 import { redirect } from 'next/navigation'
 import { showToast } from "@/lib/toast/showToast";
 

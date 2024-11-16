@@ -5,7 +5,7 @@ import FormContainer from "@/components/forms/FormContainer";
 import PasswordInput from "@/components/inputs/PasswordInput";
 import Typography from "@/components/typography/Typography";
 import { useChangePassword } from "@/lib/features/user/hooks/useChangePassword";
-import { clearUserErrors, userSelectors } from "@/lib/features/user/userSlice";
+import { clearUserErrors, userSelectors } from "@/lib/store/slices/userSlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

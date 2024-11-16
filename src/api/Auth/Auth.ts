@@ -1,4 +1,4 @@
-import { UserProfile } from "@/lib/features/user/userSlice";
+import { UserProfile } from "@/lib/store/slices/userSlice";
 import Base from "../Base";
 import { ChangePasswordBody, ConfirmCodeBody, LogInBody, SignInBody } from "./types";
 

@@ -1,10 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import userSlice from '../features/user/userSlice'
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import userSlice from './slices/userSlice'
+import modalSlice from './slices/modalSlice';
+
+const rootReducer = combineReducers({
+	user: userSlice,
+	modal: modalSlice
+})
 
 export const store = configureStore({
-	reducer: {
-		user: userSlice
-	},
+	reducer: rootReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

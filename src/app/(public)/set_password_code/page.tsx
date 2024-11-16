@@ -5,7 +5,7 @@ import FormContainer from "@/components/forms/FormContainer";
 import TextInput from "@/components/inputs/TextInput";
 import Typography from "@/components/typography/Typography";
 import { useConfirmPhoneNumber } from "@/lib/features/user/hooks/useConfirmPhoneNumber";
-import { clearUserErrors, userSelectors } from "@/lib/features/user/userSlice";
+import { clearUserErrors, userSelectors } from "@/lib/store/slices/userSlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

@@ -6,7 +6,7 @@ import PasswordInput from "@/components/inputs/PasswordInput";
 import TextInput from "@/components/inputs/TextInput";
 import Typography from "@/components/typography/Typography";
 import { useSignIn } from "@/lib/features/user/hooks/useSignIn";
-import { clearUserErrors, userSelectors } from "@/lib/features/user/userSlice";
+import { clearUserErrors, userSelectors } from "@/lib/store/slices/userSlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

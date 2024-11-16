@@ -1,6 +1,6 @@
 import apiSingleton from "@/api/ApiFactory";
 import { useMutation } from "@tanstack/react-query";
-import { setUserErrors, setUserProfile } from "../userSlice";
+import { setUserErrors, setUserProfile } from "../../../store/slices/userSlice";
 import { LogInBody } from "@/api/Auth/types";
 import { useDispatch } from "react-redux";
 import { redirect } from 'next/navigation'
@@ -12,7 +12,7 @@ export function useLogIn() {
 		handleLogIn: useMutation({
 			mutationFn: (data: LogInBody) => apiSingleton.auth.logIn(data),
 			onSuccess: (data) =>  {
-				dispatch(setUserProfile(data)),
+				dispatch(setUserProfile(data))
 				redirect('/')
 			},
 			onError: (error: any) => {

@@ -1,5 +1,6 @@
 import ApiClient from "./ApiClient"
 import { AuthClient } from "./Auth"
+import { StationClient } from "./Station"
 
 class ApiFactory {
 	api
@@ -9,7 +10,8 @@ class ApiFactory {
 
 	createApiSingleton() {
 		return {
-			auth: new AuthClient(this.api)
+			auth: new AuthClient(this.api),
+			station: new StationClient(this.api)
 		}
 	}
 }
