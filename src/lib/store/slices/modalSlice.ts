@@ -5,13 +5,13 @@ import { ValidationException } from '@/lib/exception/types';
 import { formatException } from '@/lib/exception/utils';
 import { RootState } from '../store';
 
-export interface ModalState {
+export type ModalState = {
   [modalName: string]: {
     isOpen: boolean;
     data: ModalData | null;
 	errors: Record<string, string>
-	refetch?: boolean
-  };
+	refetch: boolean
+  },
 }
 
 const initialState: ModalState = {}
@@ -22,7 +22,7 @@ export const modalSlice = createSlice({
 	reducers: {
 		openModal: (state, action: PayloadAction<{modalName: ModalName, data: ModalData | null}>) => {
 			const { modalName, data } = action.payload;
-			
+
 			state[modalName] = {
 				isOpen: true,
 				data,
@@ -37,7 +37,7 @@ export const modalSlice = createSlice({
 				state[modalName].isOpen = false;
 				state[modalName].data = null;
 				state[modalName].errors = {};
-				state[modalName].refetch = true
+				state[modalName].refetch = true;
 			}
 		},
 		setModalErrors: (state, action: PayloadAction<{modalName: ModalName, errors: ValidationException}>) => {
@@ -52,9 +52,14 @@ export const modalSlice = createSlice({
 })
 
 export const stationModalSelectors = {
-	state: (state: RootState) => state.modal?.stationModal,
-	refetch: (state: RootState) => state.modal?.stationModal?.refetch,
-	errors: (state: RootState) => state.modal?.stationModal?.errors
+	state: (state: RootState) => state.modal?.stationUpdateModal,
+	refetch: (state: RootState) => state.modal?.stationUpdateModal?.refetch,
+	errors: (state: RootState) => state.modal?.stationUpdateModal?.errors
+};
+
+export const stationDeleteSelectors = {
+	state: (state: RootState) => state.modal?.stationDeleteModal,
+	refetch: (state: RootState) => state.modal?.stationDeleteModal?.refetch,
 };
 
 export const { openModal, closeModal, setModalErrors, clearModalErrors } = modalSlice.actions

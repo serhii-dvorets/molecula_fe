@@ -7,8 +7,8 @@ import { closeModal, stationModalSelectors } from "@/lib/store/slices/modalSlice
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export function StationModal() {
-	const modalName="stationModal"
+export function StationUpdateModal() {
+	const modalName="stationUpdateModal"
 
 	const { handleCreateStation, handleUpdateStation } = useManageStation()
 
@@ -25,7 +25,7 @@ export function StationModal() {
 	});
 
 	useEffect(() => {
-		if (modalState?.data) {
+		if (modalState?.data && modalState?.data.type === 'stationUpdateModal') {
 			setFormData({
 				name: modalState?.data?.name,
 		        location: modalState?.data?.location

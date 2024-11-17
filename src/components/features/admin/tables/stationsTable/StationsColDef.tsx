@@ -1,11 +1,12 @@
 import React from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
 import { TableStation } from './types';
+import { ModalName } from '@/lib/features/modals/types';
 
 const columnHelper = createColumnHelper<TableStation>();
 
 type Props = {
-	onOpenModal: (data: TableStation) => void;
+	onOpenModal: (modelName: ModalName, data: TableStation) => void;
 }
 
 export function getColumns({ onOpenModal }: Props) {
@@ -31,7 +32,13 @@ export function getColumns({ onOpenModal }: Props) {
 		columnHelper.accessor('update', {
 			enableSorting: false,
 			header: () => <span className="whitespace-nowrap">{"Змінити"}</span>,
-			cell: (info) => <button onClick={() => onOpenModal(info.row.original)}>Змінити</button>,
+			cell: (info) => <button onClick={() => onOpenModal('stationUpdateModal', info.row.original)}>Змінити</button>,
+			footer: (info) => info.column.id,
+		}),
+		columnHelper.accessor('delete', {
+			enableSorting: false,
+			header: () => <span className="whitespace-nowrap">{"Видалити"}</span>,
+			cell: (info) => <button onClick={() => onOpenModal('stationDeleteModal', info.row.original)}>Видалити</button>,
 			footer: (info) => info.column.id,
 		})
 	];

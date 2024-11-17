@@ -11,10 +11,14 @@ export class StationClient extends Base {
 	}
 
 	async getAll(): Promise<Station[] | []> {
-		return this.client.get('/station', {})
+		return this.client.get('/station')
 	}
 
 	async getOne(id: string): Promise<Station> {
-		return this.client.get(`/station/${id}`, {})
+		return this.client.get(`/station/${id}`)
+	}
+
+	async delete(id: string): Promise<void> {
+		return this.client.delete({ url: `/station/${id}` })
 	}
 }

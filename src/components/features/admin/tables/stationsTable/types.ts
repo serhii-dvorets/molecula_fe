@@ -4,4 +4,5 @@ export type TableStation = {
   location: string;
   averageRating: string;
   update: string;
+  delete: string;
 }

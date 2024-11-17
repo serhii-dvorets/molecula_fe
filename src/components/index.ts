@@ -1,2 +1,2 @@
-export { SideBar, StationsTable, StationModal } from './features/admin'
-export { Modal } from './modal'
+export { SideBar, StationsTable, StationUpdateModal } from './features/admin'
+export { Modal, ConfirmModal } from './modal'

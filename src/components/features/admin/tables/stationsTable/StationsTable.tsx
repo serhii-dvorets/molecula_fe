@@ -4,6 +4,7 @@ import { getColumns } from "./StationsColDef";
 import { Station } from "@/api/Station/types";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/lib/store/slices/modalSlice";
+import { ModalName } from "@/lib/features/modals/types";
 
 type Props = {
     stations: Station[]
@@ -17,18 +18,17 @@ export function StationsTable({ stations }: Props) {
 			name: station.name,
 			location: station.location,
 			averageRating: station.averageRating,
-			update: 'Змінити'
+			update: 'Змінити',
+			delete: 'Видалити',
 		};
 	});
 
-	const handleOpenModal = (data: TableStation) => {
+	const handleOpenModal = (modalName: ModalName, data: TableStation) => {
 		dispatch(openModal({
-			modalName: 'stationModal',
+			modalName: modalName,
 			data: {
-				type: 'stationModal',
-				id: data.id,
-				name: data.name,
-				location: data.location
+				type: modalName,
+				...data
 			}
 		}))
 	}

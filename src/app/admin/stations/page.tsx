@@ -1,11 +1,12 @@
 "use client";
 import { Station } from "@/api/Station/types";
-import { SideBar, StationModal } from "@/components";
+import { SideBar, StationUpdateModal } from "@/components";
 import { StationsTable } from "@/components";
+import { StationDeleteModal } from "@/components/features/admin/modals";
 import isOpenFor from "@/components/hoc/isOpenFor";
 import { ROLES } from "@/lib/constants/roles";
 import { useGetStations } from "@/lib/features/station/hooks/useGetStations";
-import { openModal, stationModalSelectors } from "@/lib/store/slices/modalSlice";
+import { openModal, stationDeleteSelectors, stationModalSelectors } from "@/lib/store/slices/modalSlice";
 import { userSelectors } from "@/lib/store/slices/userSlice";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -15,13 +16,14 @@ function AdminStationsPage() {
 	const dispatch = useDispatch()
 	const { handleGetAllStations } = useGetStations()
 	const userProfile = useSelector(userSelectors.user)
-	const refetchStations = useSelector(stationModalSelectors.refetch)
+	const updateRefetch = useSelector(stationModalSelectors.refetch)
+	const deleteRefetch = useSelector(stationDeleteSelectors.refetch)
 
 	const [stations, setStations] = useState<Station[] | []>([])
 
 	useEffect(() => {
 		fetchStations()
-	}, [refetchStations])
+	}, [updateRefetch, deleteRefetch])
 
 	const fetchStations = async () => {
 		const data = await handleGetAllStations.mutateAsync()
@@ -29,7 +31,7 @@ function AdminStationsPage() {
 	}
 
 	const handleCreateStation = () => {
-		dispatch(openModal({ modalName: 'stationModal', data: null }))
+		dispatch(openModal({ modalName: 'stationUpdateModal', data: null }))
 	}
 
 	return (
@@ -44,7 +46,8 @@ function AdminStationsPage() {
 					<button onClick={handleCreateStation} className="p-2 border bg-slate-300">Створити станцію +</button>
 				</div>
 				<StationsTable stations={stations} />
-				<StationModal />
+				<StationUpdateModal />
+				<StationDeleteModal />
 			</SideBar>
 		</div>
 	);

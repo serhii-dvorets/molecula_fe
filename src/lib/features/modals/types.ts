@@ -1,5 +1,8 @@
 export type ModalData =
-| {type: 'stationModal', id?: string, name: string, location: string}
+| { type: 'stationUpdateModal', id?: string, name: string, location: string}
+| { type: 'stationDeleteModal', id: string };
 
 
-export type ModalName = 'stationModal'
+export type ModalName = 
+|'stationUpdateModal'
+| 'stationDeleteModal';

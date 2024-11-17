@@ -13,7 +13,7 @@ export function useManageStation() {
 			mutationFn: (data: CreateStationBody) => apiSingleton.station.create(data),
 			onSuccess: () =>  {
 				showToast('success', 'Станція успішно створена')
-				dispatch(closeModal('stationModal'))
+				dispatch(closeModal('stationUpdateModal'))
 			},
 			onError: (error: any) => {
 				if (error?.message) {
@@ -22,7 +22,7 @@ export function useManageStation() {
 				}
 
 				if (error?.statusCode === 400 && error?.code && error?.fields){
-					dispatch(setModalErrors({ modalName: 'stationModal', errors: error }))
+					dispatch(setModalErrors({ modalName: 'stationUpdateModal', errors: error }))
 				}			
 			}
 			
@@ -31,7 +31,7 @@ export function useManageStation() {
 			mutationFn: (data: UpdateStationBody) => apiSingleton.station.update(data.id, { ...data }),
 			onSuccess: () =>  {
 				showToast('success', 'Станція успішно оновлена')
-				dispatch(closeModal('stationModal'))
+				dispatch(closeModal('stationUpdateModal'))
 			},
 			onError: (error: any) => {
 				if (error?.message) {
@@ -40,7 +40,7 @@ export function useManageStation() {
 				}
 
 				if (error?.statusCode === 400 && error?.code && error?.fields){
-					dispatch(setModalErrors({ modalName: 'stationModal', errors: error }))
+					dispatch(setModalErrors({ modalName: 'stationUpdateModal', errors: error }))
 				}			
 			}
 			
