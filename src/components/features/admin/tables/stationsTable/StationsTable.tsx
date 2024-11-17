@@ -22,8 +22,6 @@ export function StationsTable({ stations }: Props) {
 	});
 
 	const handleOpenModal = (data: TableStation) => {
-		console.log('handleOpenModal', data);
-		
 		dispatch(openModal({
 			modalName: 'stationModal',
 			data: {

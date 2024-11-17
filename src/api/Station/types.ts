@@ -1,13 +1,16 @@
 export type CreateStationBody = {
-    name: string,
-    phoneNumber: string,
-    password: string,
-    confirmPassword: string,
+    name: string;
+    location: string;
+    postIds: string[] | [],
+    employeeIds: string[] | []
 }
 
 export type UpdateStationBody = {
-    phoneNumber: string,
-    password: string,
+    id: string;
+    name?: string;
+    location?: string;
+    postIds: string[] | [],
+    employeeIds: string[] | []
 }
 
 export type Station = {

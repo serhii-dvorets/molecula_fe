@@ -1,17 +1,20 @@
-import { UserProfile } from "@/lib/store/slices/userSlice";
 import Base from "../Base";
-import { UpdateStationBody, CreateStationBody } from "./types";
+import { UpdateStationBody, CreateStationBody, Station } from "./types";
 
 export class StationClient extends Base {
-	async create(body: CreateStationBody): Promise<UserProfile> {
-		return this.client.post({ url: '/station/create', body })
+	async create(body: CreateStationBody): Promise<Station> {
+		return this.client.post({ url: '/station', body })
 	}
 
-	async update(body: UpdateStationBody): Promise<UserProfile> {
-		return this.client.patch({ url: '/station/update', body })
+	async update(id: string, body: UpdateStationBody): Promise<Station> {
+		return this.client.patch({ url: `/station/${id}`, body })
 	}
 
-	async getAll(): Promise<UserProfile> {
+	async getAll(): Promise<Station[] | []> {
 		return this.client.get('/station', {})
+	}
+
+	async getOne(id: string): Promise<Station> {
+		return this.client.get(`/station/${id}`, {})
 	}
 }

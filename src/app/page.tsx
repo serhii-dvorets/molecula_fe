@@ -11,8 +11,10 @@ export default function HomePage() {
 			{userProfile && (
 				<div>Привіт, {userProfile.name}! Бачимо що ти залогінився!</div>
 			)}
-			<Link href={'/admin'}>admin</Link>
-			<Link href={'/about'}>about</Link>
+			<div className="flex gap-4 p-4">
+				<Link href={'/login'} className="border p-2 bg-slate-300">Увійти</Link>
+				<Link href={'/admin'} className="border p-2 bg-slate-300">Адмін панель</Link>
+			</div>
 		</div>
 	);
 }
