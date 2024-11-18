@@ -6,9 +6,10 @@ type ModalProps = {
   onClose: () => void;
   title: string;
   children: React.ReactNode;
+  className?: string;
 };
 
-export const Modal: React.FC<ModalProps> = ({ isOpen = false, onClose, title, children }) => {
+export const Modal: React.FC<ModalProps> = ({ isOpen = false, onClose, title, children, className = '' }) => {
 	useEffect(() => {
 		if (isOpen) {
 			document.body.style.overflow = "hidden";
@@ -29,7 +30,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen = false, onClose, title, ch
 		>
 			<div className={`fixed inset-0 bg-black bg-opacity-50 z-50 ${isOpen ? "block" : "hidden"}`}>
 				<div className="flex items-center justify-center min-h-screen">
-					<div className="bg-white rounded-lg shadow-lg w-96 p-6 relative">
+					<div className={`bg-white rounded-lg shadow-lg w-max p-6 relative ${className}`}>
 						<button
 							className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
 							onClick={onClose}

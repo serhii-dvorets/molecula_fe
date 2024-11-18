@@ -53,7 +53,7 @@ class ApiClient {
 		return response.data;
 	}
 
-	get(endpoint: string, params: AxiosRequestConfig) {
+	get(endpoint: string, params?: AxiosRequestConfig) {
 		return this.#request({ url: endpoint, method: "GET", params });
 	}
 

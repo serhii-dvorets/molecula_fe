@@ -6,9 +6,10 @@ type ModalProps = {
   onClose: () => void;
   onConfirm: () => void;
   title: string;
+  confirmButtonTitle?: string
 };
 
-export const ConfirmModal: React.FC<ModalProps> = ({ isOpen = false, onClose, onConfirm, title }) => {
+export const ConfirmModal: React.FC<ModalProps> = ({ isOpen = false, onClose, onConfirm, title, confirmButtonTitle = 'Видалити' }) => {
 	useEffect(() => {
 		if (isOpen) {
 			document.body.style.overflow = "hidden";
@@ -39,7 +40,7 @@ export const ConfirmModal: React.FC<ModalProps> = ({ isOpen = false, onClose, on
 						<h2 className="text-xl font-bold text-center mb-4">{title}</h2>
 						<div className="flex w-full justify-center gap-4">
 							<button onClick={onClose} className="border p-2 bg-slate-300">Відмінити</button>
-							<button onClick={onConfirm} className="border p-2 bg-slate-300">Видалити</button>
+							<button onClick={onConfirm} className="border p-2 bg-slate-300">{confirmButtonTitle}</button>
 						</div>
 					</div>
 				</div>

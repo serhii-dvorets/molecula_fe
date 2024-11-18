@@ -3,7 +3,7 @@ import FormContainer from "@/components/forms/FormContainer";
 import TextInput from "@/components/inputs/TextInput";
 import { Modal } from "@/components/modal";
 import { useManageStation } from "@/lib/features/station/hooks/useManageStation";
-import { closeModal, stationModalSelectors } from "@/lib/store/slices/modalSlice";
+import { clearModalErrors, closeModal, stationModalSelectors } from "@/lib/store/slices/modalSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -38,13 +38,13 @@ export function StationUpdateModal() {
 	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		dispatch(clearModalErrors('stationUpdateModal'))
 		const { name, value } = e.target;
 		setFormData((prevData) => ({ ...prevData, [name]: value }));
 	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
 		if (isUpdateModal && modalState?.data?.id) {
 			const updatedData = {
 				...formData,
