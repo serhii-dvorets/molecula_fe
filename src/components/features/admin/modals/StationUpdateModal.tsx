@@ -1,6 +1,6 @@
 import ActionButton from "@/components/buttons/ActionButton/ActionButton";
 import FormContainer from "@/components/forms/FormContainer";
-import TextInput from "@/components/inputs/TextInput";
+import { Input } from "@/components/inputs";
 import { Modal } from "@/components/modal";
 import { useManageStation } from "@/lib/features/station/hooks/useManageStation";
 import { clearModalErrors, closeModal, stationModalSelectors } from "@/lib/store/slices/modalSlice";
@@ -31,16 +31,16 @@ export function StationUpdateModal() {
 		        location: modalState?.data?.location
 			})
 		}
-	}, [modalState])
+	}, [modalState.data])
 
 	const handleClose = () => {
 		dispatch(closeModal(modalName))
 	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(clearModalErrors('stationUpdateModal'))
 		const { name, value } = e.target;
 		setFormData((prevData) => ({ ...prevData, [name]: value }));
+		dispatch(clearModalErrors('stationUpdateModal'))
 	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,25 +49,21 @@ export function StationUpdateModal() {
 			const updatedData = {
 				...formData,
 				id: modalState.data.id,
-				postIds: [],
-				employeeIds: []
 			}
 			handleUpdateStation.mutateAsync(updatedData)
 		} else {
 			const createData = {
 				...formData,
-				postIds: [],
-				employeeIds: []
 			}
 			handleCreateStation.mutateAsync(createData)
 		}
 	};
 
 	return (
-		<>
-			<Modal isOpen={isOpen} onClose={handleClose} title={isUpdateModal ? 'Змінити станцію' : 'Створити станцію'}>
+		<div>
+			<Modal  className="w-[40vw]" isOpen={isOpen} onClose={handleClose} title={isUpdateModal ? 'Змінити станцію' : 'Створити станцію'}>
 				<FormContainer onSubmit={handleSubmit} className="w-full max-w-[350px]" shadow="">
-					<TextInput
+					<Input
 						label="Назва"
 						name="name"
 						value={formData.name}
@@ -75,7 +71,7 @@ export function StationUpdateModal() {
 						placeholder="Назва станції"
 						error={errors?.name}
 					/>
-					<TextInput
+					<Input
 						label="Локація"
 						name="location"
 						value={formData.location}
@@ -86,6 +82,6 @@ export function StationUpdateModal() {
 					<ActionButton type="submit">{isUpdateModal ? 'Змінити' : 'Створити'}</ActionButton>
 				</FormContainer>
 			</Modal>
-		</>
+		</div>
 	)
 }

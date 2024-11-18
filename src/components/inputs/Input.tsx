@@ -1,15 +1,16 @@
-type TextInputProps = {
-    type?: "text",
+type InputProps = {
+    type?: "text" | 'number',
     label: string, 
     name: string, 
     value: string | number | readonly string[] | undefined, 
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, 
     placeholder: string | undefined, 
-    required?: boolean
-    error?: string
+    required?: boolean,
+    error?: string,
+	className?: string
 }
 
-const TextInput = ({
+export const Input = ({
 	label,
 	error = '',
 	type = 'text',
@@ -17,10 +18,11 @@ const TextInput = ({
 	value,
 	onChange,
 	placeholder,
-	required = false
-}: TextInputProps) => {
+	required = false,
+	className = ''
+}: InputProps) => {
 	return (
-		<div className="flex flex-col">
+		<div className={`flex flex-col ${className}`}>
 			{label && (
 				<label htmlFor={name} className="text-sm font-medium text-gray-700">
 					{label}
@@ -47,5 +49,3 @@ const TextInput = ({
 		</div>
 	);
 };
-
-export default TextInput;

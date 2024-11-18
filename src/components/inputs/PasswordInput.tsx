@@ -13,7 +13,7 @@ type PasswordInputProps = {
     error?: string
 }
 
-const PasswordInput = ({
+export const PasswordInput = ({
 	label,
 	name,
 	value,
@@ -65,5 +65,3 @@ const PasswordInput = ({
 		</div>
 	);
 };
-
-export default PasswordInput;

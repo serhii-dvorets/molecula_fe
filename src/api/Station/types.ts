@@ -1,16 +1,16 @@
+import { Post } from "../Post/types";
+
 export type CreateStationBody = {
     name: string;
     location: string;
-    postIds: string[] | [],
-    employeeIds: string[] | []
 }
 
 export type UpdateStationBody = {
     id: string;
     name?: string;
     location?: string;
-    postIds: string[] | [],
-    employeeIds: string[] | []
+    posts?: Post[] | [],
+    employeeIds?: string[] | []
 }
 
 export type Station = {

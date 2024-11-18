@@ -3,7 +3,7 @@
 import ActionButton from "@/components/buttons/ActionButton/ActionButton";
 import FormContainer from "@/components/forms/FormContainer";
 import PasswordInput from "@/components/inputs/PasswordInput";
-import TextInput from "@/components/inputs/TextInput";
+import TextInput from "@/components/inputs/Input";
 import Typography from "@/components/typography/Typography";
 import { useSignIn } from "@/lib/features/user/hooks/useSignIn";
 import { clearUserErrors, userSelectors } from "@/lib/store/slices/userSlice";
