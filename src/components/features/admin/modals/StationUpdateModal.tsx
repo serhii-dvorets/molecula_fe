@@ -31,7 +31,7 @@ export function StationUpdateModal() {
 		        location: modalState?.data?.location
 			})
 		}
-	}, [modalState.data])
+	}, [modalState?.data])
 
 	const handleClose = () => {
 		dispatch(closeModal(modalName))

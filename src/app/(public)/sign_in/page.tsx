@@ -1,9 +1,8 @@
 "use client";
 
+import { Input, PasswordInput } from "@/components";
 import ActionButton from "@/components/buttons/ActionButton/ActionButton";
 import FormContainer from "@/components/forms/FormContainer";
-import PasswordInput from "@/components/inputs/PasswordInput";
-import TextInput from "@/components/inputs/Input";
 import Typography from "@/components/typography/Typography";
 import { useSignIn } from "@/lib/features/user/hooks/useSignIn";
 import { clearUserErrors, userSelectors } from "@/lib/store/slices/userSlice";
@@ -37,7 +36,7 @@ export default function SignInPage() {
 		<div className="min-h-screen bg-gray-100 flex flex-col gap-4 items-center justify-center px-4">
 			<Typography variant="headline-medium">Реєстрація</Typography>
 			<FormContainer onSubmit={handleSubmit} className="w-full max-w-[350px]">
-				<TextInput
+				<Input
 					label="Ім'я"
 					name="name"
 					value={formData.name}
@@ -45,7 +44,7 @@ export default function SignInPage() {
 					placeholder="Ваше ім'я"
 					error={errors.name}
 				/>
-				<TextInput
+				<Input
 					label="Номер телефону"
 					name="phoneNumber"
 					value={formData.phoneNumber}
