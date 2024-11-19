@@ -1,11 +1,11 @@
-import { Post } from "../Post/types";
+import { Post } from "../Tariff/types";
 
-export type CreateStationBody = {
+export type CreateOrderBody = {
     name: string;
     location: string;
 }
 
-export type UpdateStationBody = {
+export type UpdateOrderBody = {
     id: string;
     name?: string;
     location?: string;
@@ -13,7 +13,7 @@ export type UpdateStationBody = {
     employeeIds?: string[] | []
 }
 
-export type Station = {
+export type Order = {
     id: string;
     name: string;
     location: string;

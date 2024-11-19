@@ -4,19 +4,19 @@ import { showToast } from "@/lib/toast/showToast";
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 
-export function useDeletePost() {
+export function useDeleteTariff() {
 	const dispatch = useDispatch()
 	return {
-		handleDeletePost: useMutation({
-			mutationFn: (id: string) => apiSingleton.post.delete(id),
+		handleDeleteTariff: useMutation({
+			mutationFn: (id: string) => apiSingleton.tariff.delete(id),
 			onSuccess() {
-				showToast('success', 'Пост успішно видалений')
-				dispatch(closeModal('stationDeleteModal'))
+				showToast('success', 'Тариф успішно видалений')
+				dispatch(closeModal('tariffDeleteModal'))
 			},
 			onError: (error: any) => {
 				if (error?.message) {
 					// TODO ShowToast 
-					console.log('handleDeletePost error', error.message);
+					console.log('handleDeleteTariff error', error.message);
 				}		
 			}
 		})

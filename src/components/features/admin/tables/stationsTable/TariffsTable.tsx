@@ -1,29 +1,29 @@
 import { Table } from "@/components/tables/table";
-import { TableStation } from "./types";
-import { getColumns } from "./StationsColDef";
-import { Station } from "@/api/Station/types";
+import { TableTariff } from "./types";
+import { getColumns } from "./TariffsColDef";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/lib/store/slices/modalSlice";
 import { ModalName } from "@/lib/features/modals/types";
+import { Tariff } from "@/api/Tariff/types";
 
 type Props = {
-    stations: Station[]
+    tariffs: Tariff[]
 }
 
-export function StationsTable({ stations }: Props) {
+export function TariffsTable({ tariffs }: Props) {
 	const dispatch = useDispatch()
-	const stationsTableData: TableStation[] = stations.map((station) => {
+	const tariffTableData: TableTariff[] = tariffs.map((tariff) => {
 		return {
-			id: station.id,
-			name: station.name,
-			location: station.location,
-			averageRating: station.averageRating,
+			id: tariff.id,
+			name: tariff.name,
+			unitOfMeasurement: tariff.unitOfMeasurement,
+			pricePerUnit: tariff.pricePerUnit,
 			update: 'Змінити',
 			delete: 'Видалити',
 		};
 	});
 
-	const handleOpenModal = (modalName: ModalName, data: TableStation) => {
+	const handleOpenModal = (modalName: ModalName, data: TableTariff) => {
 		dispatch(openModal({
 			modalName: modalName,
 			data: {
@@ -36,12 +36,12 @@ export function StationsTable({ stations }: Props) {
 	const columns = getColumns({ onOpenModal: handleOpenModal })
 
 	return (
-		<Table<TableStation>
-			data={stationsTableData}
+		<Table<TableTariff>
+			data={tariffTableData}
 			columns={columns}
 			emptyMessage={
 				<div className="flex w-full flex-col items-center justify-center rounded-b-2xl bg-white p-[80px]">
-					<p className="mb-[24px] text-h4 font-semibold text-grey-900">Жодної станції поки що не додано</p>
+					<p className="mb-[24px] text-h4 font-semibold text-grey-900">Жодної тарифу поки що не додано</p>
 				</div>
 			}
 		/>

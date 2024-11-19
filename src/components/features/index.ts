@@ -1,1 +1,1 @@
-export { SideBar, StationsTable, StationUpdateModal } from './admin'
+export { SideBar, StationsTable, TariffUpdateModal } from './admin'

@@ -1,8 +1,8 @@
 export type ModalData =
-| { type: 'stationUpdateModal', id?: string, name: string, location: string}
-| { type: 'stationDeleteModal', id: string };
+| { type: 'tariffUpdateModal', id?: string, name: string, unitOfMeasurement: string, pricePerUnit: string}
+| { type: 'tariffDeleteModal', id: string };
 
 
 export type ModalName = 
-|'stationUpdateModal'
-| 'stationDeleteModal';
+| 'tariffUpdateModal'
+| 'tariffDeleteModal';

@@ -1,12 +1,12 @@
 import React from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
-import { TableStation } from './types';
+import { TableTariff } from './types';
 import { ModalName } from '@/lib/features/modals/types';
 
-const columnHelper = createColumnHelper<TableStation>();
+const columnHelper = createColumnHelper<TableTariff>();
 
 type Props = {
-	onOpenModal: (modelName: ModalName, data: TableStation) => void;
+	onOpenModal: (modelName: ModalName, data: TableTariff) => void;
 }
 
 export function getColumns({ onOpenModal }: Props) {
@@ -17,13 +17,13 @@ export function getColumns({ onOpenModal }: Props) {
 			cell: (info) => <span className="capitalize text-black-soft">{info.getValue()}</span>,
 			footer: (info) => info.column.id,
 		}),
-		columnHelper.accessor('location', {
+		columnHelper.accessor('unitOfMeasurement', {
 			enableSorting: false,
 			header: () => <span className="whitespace-nowrap">{"Адреса"}</span>,
 			cell: (info) => <span className="capitalize text-black-soft">{info.getValue()}</span>,
 			footer: (info) => info.column.id,
 		}),
-		columnHelper.accessor('averageRating', {
+		columnHelper.accessor('pricePerUnit', {
 			enableSorting: false,
 			header: () => <span className="whitespace-nowrap">{"Рейтинг"}</span>,
 			cell: (info) => <span className="text-sm capitalize text-black-soft">{info.getValue()}</span>,
@@ -32,13 +32,13 @@ export function getColumns({ onOpenModal }: Props) {
 		columnHelper.accessor('update', {
 			enableSorting: false,
 			header: () => <span className="whitespace-nowrap">{"Змінити"}</span>,
-			cell: (info) => <button onClick={() => onOpenModal('stationUpdateModal', info.row.original)}>Змінити</button>,
+			cell: (info) => <button onClick={() => onOpenModal('tariffUpdateModal', info.row.original)}>Змінити</button>,
 			footer: (info) => info.column.id,
 		}),
 		columnHelper.accessor('delete', {
 			enableSorting: false,
 			header: () => <span className="whitespace-nowrap">{"Видалити"}</span>,
-			cell: (info) => <button onClick={() => onOpenModal('stationDeleteModal', info.row.original)}>Видалити</button>,
+			cell: (info) => <button onClick={() => onOpenModal('tariffDeleteModal', info.row.original)}>Видалити</button>,
 			footer: (info) => info.column.id,
 		})
 	];

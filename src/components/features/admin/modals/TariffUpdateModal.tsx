@@ -2,33 +2,35 @@ import ActionButton from "@/components/buttons/ActionButton/ActionButton";
 import FormContainer from "@/components/forms/FormContainer";
 import { Input } from "@/components/inputs";
 import { Modal } from "@/components/modal";
-import { useManageStation } from "@/lib/features/station/hooks/useManageStation";
-import { clearModalErrors, closeModal, stationModalSelectors } from "@/lib/store/slices/modalSlice";
+import { useManageTariff } from "@/lib/features/tariff/hooks/useManageTariff";
+import { clearModalErrors, closeModal, tariffUpdateModalSelectors } from "@/lib/store/slices/modalSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export function StationUpdateModal() {
-	const modalName="stationUpdateModal"
+export function TariffUpdateModal() {
+	const modalName="tariffUpdateModal"
 
-	const { handleCreateStation, handleUpdateStation } = useManageStation()
+	const { handleCreateTariff, handleUpdateTariff } = useManageTariff()
 
 	const dispatch = useDispatch();
-	const modalState = useSelector(stationModalSelectors.state)
-	const errors = useSelector(stationModalSelectors.errors)
+	const modalState = useSelector(tariffUpdateModalSelectors.state)
+	const errors = useSelector(tariffUpdateModalSelectors.errors)
 
 	const isOpen = modalState?.isOpen
 	const isUpdateModal = !!modalState?.data?.id
 
 	const [formData, setFormData] = useState({
 		name: "",
-		location: ""
+		unitOfMeasurement: "",
+		pricePerUnit: ""
 	});
 
 	useEffect(() => {
-		if (modalState?.data && modalState?.data.type === 'stationUpdateModal') {
+		if (modalState?.data && modalState?.data.type === 'tariffUpdateModal') {
 			setFormData({
 				name: modalState?.data?.name,
-		        location: modalState?.data?.location
+		        unitOfMeasurement: modalState?.data?.unitOfMeasurement,
+		        pricePerUnit: modalState?.data?.pricePerUnit,
 			})
 		}
 	}, [modalState?.data])
@@ -40,7 +42,7 @@ export function StationUpdateModal() {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({ ...prevData, [name]: value }));
-		dispatch(clearModalErrors('stationUpdateModal'))
+		dispatch(clearModalErrors('tariffUpdateModal'))
 	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,12 +52,12 @@ export function StationUpdateModal() {
 				...formData,
 				id: modalState.data.id,
 			}
-			handleUpdateStation.mutateAsync(updatedData)
+			handleUpdateTariff.mutateAsync(updatedData)
 		} else {
 			const createData = {
 				...formData,
 			}
-			handleCreateStation.mutateAsync(createData)
+			handleCreateTariff.mutateAsync(createData)
 		}
 	};
 
@@ -68,16 +70,24 @@ export function StationUpdateModal() {
 						name="name"
 						value={formData.name}
 						onChange={handleChange}
-						placeholder="Назва станції"
+						placeholder="Назва Тарифу"
 						error={errors?.name}
 					/>
 					<Input
-						label="Локація"
-						name="location"
-						value={formData.location}
+						label="Одиниця виміру"
+						name="unitOfMeasurement"
+						value={formData.unitOfMeasurement}
 						onChange={handleChange}
-						placeholder="Локація станції"
-						error={errors?.location}
+						placeholder="Одиниця виміру"
+						error={errors?.unitOfMeasurement}
+					/>
+					<Input
+						label="Ціна за одиницю"
+						name="pricePerUnit"
+						value={formData.pricePerUnit}
+						onChange={handleChange}
+						placeholder="Ціна за одиницю"
+						error={errors?.pricePerUnit}
 					/>
 					<ActionButton type="submit">{isUpdateModal ? 'Змінити' : 'Створити'}</ActionButton>
 				</FormContainer>

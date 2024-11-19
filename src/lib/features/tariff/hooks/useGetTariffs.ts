@@ -1,29 +1,29 @@
 import apiSingleton from "@/api/ApiFactory";
 import { useMutation } from "@tanstack/react-query";
 
-export function useGetStations() {
+export function useGetTariffs() {
 	return {
-		handleGetOneStation: useMutation({
-			mutationFn: (id: string) => apiSingleton.station.getOne(id),
+		handleGetOneTariff: useMutation({
+			mutationFn: (id: string) => apiSingleton.tariff.getOne(id),
 			onSuccess(data) {
 				return data
 			},
 			onError: (error: any) => {
 				if (error?.message) {
 					// TODO ShowToast 
-					console.log('handleGetOneStation error', error.message);
+					console.log('handleGetOneTariff error', error.message);
 				}		
 			}
 		}),
-		handleGetAllStations: useMutation({
-			mutationFn: () => apiSingleton.station.getAll(),
+		handleGetAllTariffs: useMutation({
+			mutationFn: () => apiSingleton.tariff.getAll(),
 			onSuccess(data) {
 				return data
 			},
 			onError: (error: any) => {
 				if (error?.message) {
 					// TODO ShowToast 
-					console.log('handleGetAllStations error', error.message);
+					console.log('handleGetAllTariffs error', error.message);
 				}		
 			}
 		}),

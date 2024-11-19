@@ -1,20 +1,20 @@
 import Base from "../Base";
-import { UpdateStationBody, CreateStationBody, Station } from "./types";
+import { UpdateOrderBody, CreateOrderBody, Order } from "./types";
 
-export class StationClient extends Base {
-	async create(body: CreateStationBody): Promise<Station> {
+export class OrderClient extends Base {
+	async create(body: CreateOrderBody): Promise<Order> {
 		return this.client.post({ url: '/station', body })
 	}
 
-	async update(id: string, body: UpdateStationBody): Promise<Station> {
+	async update(id: string, body: UpdateOrderBody): Promise<Order> {
 		return this.client.patch({ url: `/station/${id}`, body })
 	}
 
-	async getAll(): Promise<Station[] | []> {
+	async getAll(): Promise<Order[] | []> {
 		return this.client.get('/station')
 	}
 
-	async getOne(id: string): Promise<Station> {
+	async getOne(id: string): Promise<Order> {
 		return this.client.get(`/station/${id}`)
 	}
 

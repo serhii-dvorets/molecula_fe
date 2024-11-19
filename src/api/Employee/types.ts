@@ -1,4 +1,4 @@
-import { Post } from "../Post/types";
+import { Post } from "../Tariff/types";
 
 export type CreateEmployeeBody = {
     name: string;

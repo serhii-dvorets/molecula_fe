@@ -51,15 +51,15 @@ export const modalSlice = createSlice({
 	},
 })
 
-export const stationModalSelectors = {
-	state: (state: RootState) => state.modal?.stationUpdateModal,
-	refetch: (state: RootState) => state.modal?.stationUpdateModal?.refetch,
-	errors: (state: RootState) => state.modal?.stationUpdateModal?.errors
+export const tariffUpdateModalSelectors = {
+	state: (state: RootState) => state.modal?.tariffUpdateModal,
+	refetch: (state: RootState) => state.modal?.tariffUpdateModal?.refetch,
+	errors: (state: RootState) => state.modal?.tariffUpdateModal?.errors
 };
 
-export const stationDeleteSelectors = {
-	state: (state: RootState) => state.modal?.stationDeleteModal,
-	refetch: (state: RootState) => state.modal?.stationDeleteModal?.refetch,
+export const tariffDeleteModalSelectors = {
+	state: (state: RootState) => state.modal?.tariffDeleteModal,
+	refetch: (state: RootState) => state.modal?.tariffDeleteModal?.refetch,
 };
 
 export const { openModal, closeModal, setModalErrors, clearModalErrors } = modalSlice.actions

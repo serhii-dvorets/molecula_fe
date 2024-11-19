@@ -1,8 +1,8 @@
-export type TableStation = {
+export type TableTariff = {
   id: string;
   name: string;
-  location: string;
-  averageRating: string;
+  unitOfMeasurement: string;
+  pricePerUnit: string;
   update: string;
   delete: string;
 }
