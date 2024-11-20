@@ -1,1 +1,1 @@
-export { TariffsTable } from './stationsTable'
+export { TariffsTable } from './tariffsTable'

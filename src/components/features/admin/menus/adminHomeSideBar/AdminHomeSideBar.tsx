@@ -1,6 +1,6 @@
 import { Sidebar } from "@/components/menus/sideBar";
 import { SidebarItem } from "@/components/menus/sideBar/sideBarItem/types";
-import { ArchiveBoxIcon, CalendarIcon, CogIcon, HomeIcon, UserIcon } from "@heroicons/react/16/solid";
+import { ArchiveBoxIcon, CalendarIcon, CogIcon, HomeIcon, UserIcon, CurrencyDollarIcon } from "@heroicons/react/16/solid";
 
 export const SideBar = ({ children }: {children: React.ReactNode}) => {
 	const sidebarItems: SidebarItem[] = [
@@ -10,9 +10,14 @@ export const SideBar = ({ children }: {children: React.ReactNode}) => {
 			path: "/admin"
 		},
 		{
-			icon: <UserIcon className="h-6 w-6" />,
+			icon: <CurrencyDollarIcon className="h-6 w-6" />,
 			text: "Тарифи",
 			path: "/admin/tariff"
+		},
+		{
+			icon: <UserIcon className="h-6 w-6" />,
+			text: "Клієнти",
+			path: "/admin/customer"
 		},
 		{
 			icon: <CalendarIcon className="h-6 w-6" />,

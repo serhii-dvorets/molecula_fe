@@ -12,7 +12,7 @@ type Props = {
 
 export function TariffsTable({ tariffs }: Props) {
 	const dispatch = useDispatch()
-	const tariffTableData: TableTariff[] = tariffs.map((tariff) => {
+	const tableData: TableTariff[] = tariffs.map((tariff) => {
 		return {
 			id: tariff.id,
 			name: tariff.name,
@@ -37,7 +37,7 @@ export function TariffsTable({ tariffs }: Props) {
 
 	return (
 		<Table<TableTariff>
-			data={tariffTableData}
+			data={tableData}
 			columns={columns}
 			emptyMessage={
 				<div className="flex w-full flex-col items-center justify-center rounded-b-2xl bg-white p-[80px]">
