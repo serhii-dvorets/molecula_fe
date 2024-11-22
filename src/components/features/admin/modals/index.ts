@@ -1,2 +1,2 @@
-export { TariffUpdateModal } from './TariffUpdateModal'
-export { TariffDeleteModal } from './TariffDeleteModal'
+export { TariffUpdateModal, TariffDeleteModal } from './tariff'
+export { UserUpdateModal, UserDeleteModal } from './user'

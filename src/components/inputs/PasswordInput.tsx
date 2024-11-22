@@ -56,12 +56,12 @@ export const PasswordInput = ({
 				>
 					<Image src={showPassword ? '/components_icons/password_eye_closed.png' : '/components_icons/password_eye_open.png'} height={20} width={20} alt="eye"/>
 				</button>
+				{error && (
+					<small className="absolute top-10 left-0 text-red-500 text-sm mt-1">
+						{error}
+					</small>
+				)}
 			</div>
-			{error && (
-				<small className="text-red-500 text-sm mt-1">
-					{error}
-				</small>
-			)}
 		</div>
 	);
 };

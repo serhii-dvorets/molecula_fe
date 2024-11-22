@@ -3,4 +3,6 @@ export const ROLES = {
 	CUSTOMER: 'customer',
 	SUPER_ADMIN: 'superadmin',
 	EMPLOYEE: 'employee',
+	DRIVER: 'driver',
+	MANAGER: 'manager',
 }

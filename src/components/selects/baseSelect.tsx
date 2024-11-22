@@ -1,26 +1,28 @@
-type InputProps = {
-    type?: "text" | 'number',
-    label: string, 
-    name: string, 
-    value: string | number | readonly string[] | undefined, 
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, 
-    placeholder: string | undefined, 
-    required?: boolean,
-    error?: string,
-	className?: string
+import React from 'react';
+
+interface SelectProps {
+  label?: string;
+  error?: string;
+  name: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  options: { value: string; label: string }[];
+  placeholder?: string;
+  required?: boolean;
+  className?: string;
 }
 
-export const Input = ({
+export const Select = ({
 	label,
 	error = '',
-	type = 'text',
 	name,
 	value,
 	onChange,
+	options,
 	placeholder,
 	required = false,
 	className = ''
-}: InputProps) => {
+}: SelectProps) => {
 	return (
 		<div className={`flex flex-col ${className}`}>
 			{label && (
@@ -30,20 +32,27 @@ export const Input = ({
 				</label>
 			)}
 			<div className="relative">
-				<input
-					type={type}
+				<select
 					id={name}
 					name={name}
 					value={value}
 					onChange={onChange}
-					placeholder={placeholder}
 					required={required}
 					className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
 						error
 							? 'border-red-500 focus:ring-red-500'
 							: 'border-gray-300 focus:ring-blue-500'
 					}`}
-				/>
+				>
+					{placeholder && <option value="" disabled>
+						{placeholder}
+					</option>}
+					{options.map((option) => (
+						<option key={option.value} value={option.value}>
+							{option.label}
+						</option>
+					))}
+				</select>
 				{error && (
 					<small className="absolute top-10 left-0 mt-1 text-red-500 text-sm">
 						{error}

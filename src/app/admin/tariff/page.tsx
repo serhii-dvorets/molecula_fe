@@ -1,7 +1,7 @@
 "use client";
 import { Tariff } from "@/api/Tariff/types";
 import { SideBar, TariffUpdateModal } from "@/components";
-import { TariffDeleteModal } from "@/components/features/admin/modals";
+import { TariffDeleteModal } from "@/components/features/admin/modals/tariff";
 import { TariffsTable } from "@/components/features/admin/tables";
 import isOpenFor from "@/components/hoc/isOpenFor";
 import { ROLES } from "@/lib/constants/roles";

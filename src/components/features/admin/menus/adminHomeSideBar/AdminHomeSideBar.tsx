@@ -17,7 +17,7 @@ export const SideBar = ({ children }: {children: React.ReactNode}) => {
 		{
 			icon: <UserIcon className="h-6 w-6" />,
 			text: "Клієнти",
-			path: "/admin/customer"
+			path: "/admin/user"
 		},
 		{
 			icon: <CalendarIcon className="h-6 w-6" />,

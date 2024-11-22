@@ -10,6 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 export function TariffUpdateModal() {
 	const modalName="tariffUpdateModal"
 
+	const initialData = {
+		name: "",
+		unitOfMeasurement: "",
+		pricePerUnit: ""
+	}
+
 	const { handleCreateTariff, handleUpdateTariff } = useManageTariff()
 
 	const dispatch = useDispatch();
@@ -19,11 +25,7 @@ export function TariffUpdateModal() {
 	const isOpen = modalState?.isOpen
 	const isUpdateModal = !!modalState?.data?.id
 
-	const [formData, setFormData] = useState({
-		name: "",
-		unitOfMeasurement: "",
-		pricePerUnit: ""
-	});
+	const [formData, setFormData] = useState(initialData);
 
 	useEffect(() => {
 		if (modalState?.data && modalState?.data.type === 'tariffUpdateModal') {
@@ -37,6 +39,7 @@ export function TariffUpdateModal() {
 
 	const handleClose = () => {
 		dispatch(closeModal(modalName))
+		setFormData(initialData)
 	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,8 +66,8 @@ export function TariffUpdateModal() {
 
 	return (
 		<div>
-			<Modal  className="w-[40vw]" isOpen={isOpen} onClose={handleClose} title={isUpdateModal ? 'Змінити станцію' : 'Створити станцію'}>
-				<FormContainer onSubmit={handleSubmit} className="w-full max-w-[350px]" shadow="">
+			<Modal  className="w-[500px] max-w-[50vw]" isOpen={isOpen} onClose={handleClose} title={isUpdateModal ? 'Змінити тариф' : 'Створити тариф'}>
+				<FormContainer onSubmit={handleSubmit} className="w-full max-w-[400px]" shadow="">
 					<Input
 						label="Назва"
 						name="name"

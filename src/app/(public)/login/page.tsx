@@ -33,7 +33,7 @@ export default function LoginPage() {
 	return (
 		<div className="min-h-screen bg-gray-100 flex flex-col gap-4 items-center justify-center px-4">
 			<Typography variant="headline-medium">Логін</Typography>
-			<FormContainer onSubmit={handleSubmit} className="w-full max-w-[350px]">
+			<FormContainer onSubmit={handleSubmit} className="w-full max-w-[400px]">
 				<Input
 					label="Номер телефону"
 					name="phoneNumber"

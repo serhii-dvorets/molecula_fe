@@ -62,6 +62,17 @@ export const tariffDeleteModalSelectors = {
 	refetch: (state: RootState) => state.modal?.tariffDeleteModal?.refetch,
 };
 
+export const userUpdateModalSelectors = {
+	state: (state: RootState) => state.modal?.userUpdateModal,
+	refetch: (state: RootState) => state.modal?.userUpdateModal?.refetch,
+	errors: (state: RootState) => state.modal?.userUpdateModal?.errors
+};
+
+export const userDeleteModalSelectors = {
+	state: (state: RootState) => state.modal?.userDeleteModal,
+	refetch: (state: RootState) => state.modal?.userDeleteModal?.refetch,
+};
+
 export const { openModal, closeModal, setModalErrors, clearModalErrors } = modalSlice.actions
 
 export default modalSlice.reducer
