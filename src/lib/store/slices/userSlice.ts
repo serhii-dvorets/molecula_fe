@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../store'
 import { ValidationException } from '../../exception/types'
 import { formatException } from '../../exception/utils'
 import { User } from '@/api/User/types'
@@ -29,14 +28,6 @@ export const userSlice = createSlice({
 		clearUserErrors: (state) => {state.errors = {}}
 	},
 })
-
-export const userSelectors = {
-	isAuthenticated: (state: RootState) => state.user.profile?.phoneNumberConfirmed,
-	user: (state: RootState) => state.user.profile,
-	name: (state: RootState) => state.user.profile?.name,
-	errors: (state: RootState) => state.user.errors,
-	role: (state: RootState) => state.user.profile?.role.name
-};
 
 export const { setUserProfile, setUserErrors, clearUserProfile, clearUserErrors } = userSlice.actions
 

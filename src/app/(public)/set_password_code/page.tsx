@@ -1,11 +1,12 @@
 "use client";
 
+import { Input } from "@/components";
 import ActionButton from "@/components/buttons/ActionButton/ActionButton";
 import FormContainer from "@/components/forms/FormContainer";
-import TextInput from "@/components/inputs/Input";
 import Typography from "@/components/typography/Typography";
 import { useConfirmPhoneNumber } from "@/lib/features/user/hooks/useConfirmPhoneNumber";
-import { clearUserErrors, userSelectors } from "@/lib/store/slices/userSlice";
+import { userSelectors } from "@/lib/store/selectors/userSelectors";
+import { clearUserErrors } from "@/lib/store/slices/userSlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -36,7 +37,7 @@ export default function LoginPage() {
 			<Typography variant="body-large">для завершення реєстрації ми надішелемо вам код на вказаний номер телефону.</Typography>
 			<Typography variant="body-large">Після підтвердження телефону необхідно встановити пароль.</Typography>
 			<FormContainer onSubmit={handleSubmit} className="w-full max-w-[350px]">
-				<TextInput
+				<Input
 					label="Код з повідомлення"
 					name="code"
 					value={formData.code}

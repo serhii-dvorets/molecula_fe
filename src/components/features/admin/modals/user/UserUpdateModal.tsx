@@ -4,11 +4,12 @@ import FormContainer from "@/components/forms/FormContainer";
 import { Input } from "@/components/inputs";
 import { Modal } from "@/components/modal";
 import { useManageUser } from "@/lib/features/user/hooks/useManageUser";
-import { clearModalErrors, closeModal, userUpdateModalSelectors } from "@/lib/store/slices/modalSlice";
-import { userSelectors } from "@/lib/store/slices/userSlice";
+import { clearModalErrors, closeModal } from "@/lib/store/slices/modalSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RoleSelect } from "@/components";
+import { userUpdateModalSelectors } from "@/lib/store/selectors/modalSelectors";
+import { userSelectors } from "@/lib/store/selectors/userSelectors";
 
 export function UserUpdateModal() {
 	const modalName="userUpdateModal"

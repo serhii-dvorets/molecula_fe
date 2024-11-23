@@ -1,5 +1,5 @@
 import { Table } from "@/components/tables/table";
-import { TableTariff } from "./types";
+import { TableItem } from "./types";
 import { getColumns } from "./TariffsColDef";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/lib/store/slices/modalSlice";
@@ -12,7 +12,7 @@ type Props = {
 
 export function TariffsTable({ tariffs }: Props) {
 	const dispatch = useDispatch()
-	const tableData: TableTariff[] = tariffs.map((tariff) => {
+	const tableData: TableItem[] = tariffs.map((tariff) => {
 		return {
 			id: tariff.id,
 			name: tariff.name,
@@ -23,7 +23,7 @@ export function TariffsTable({ tariffs }: Props) {
 		};
 	});
 
-	const handleOpenModal = (modalName: ModalName, data: TableTariff) => {
+	const handleOpenModal = (modalName: ModalName, data: TableItem) => {
 		dispatch(openModal({
 			modalName: modalName,
 			data: {
@@ -36,7 +36,7 @@ export function TariffsTable({ tariffs }: Props) {
 	const columns = getColumns({ onOpenModal: handleOpenModal })
 
 	return (
-		<Table<TableTariff>
+		<Table<TableItem>
 			data={tableData}
 			columns={columns}
 			emptyMessage={

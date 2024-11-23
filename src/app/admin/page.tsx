@@ -2,7 +2,7 @@
 import { SideBar } from "@/components";
 import isOpenFor from "@/components/hoc/isOpenFor";
 import { ROLES } from "@/lib/constants/roles";
-import { userSelectors } from "@/lib/store/slices/userSlice";
+import { userSelectors } from "@/lib/store/selectors/userSelectors";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 

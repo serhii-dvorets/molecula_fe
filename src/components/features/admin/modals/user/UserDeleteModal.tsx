@@ -1,6 +1,7 @@
 import { ConfirmModal } from "@/components/modal";
 import { useDeleteUser } from "@/lib/features/user/hooks/useDeleteUser";
-import { closeModal, userDeleteModalSelectors } from "@/lib/store/slices/modalSlice";
+import { userDeleteModalSelectors } from "@/lib/store/selectors/modalSelectors";
+import { closeModal } from "@/lib/store/slices/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export function UserDeleteModal() {

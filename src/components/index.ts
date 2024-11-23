@@ -3,9 +3,11 @@ export {
 	TariffUpdateModal,
 	TariffsTable,
 	StuffTable,
-	CustomersTable } from './features/admin'
+	CustomersTable,
+	OrdersTable
+} from './features/admin'
 export { Modal, ConfirmModal } from './modal'
-export { Input, PasswordInput } from './inputs'
-export { Select } from './selects'
+export { Input, PasswordInput, SearchInput } from './inputs'
+export { Select, SearchSelect } from './selects'
 export { RoleSelect } from './features'
 export { Spinner } from './spinner'

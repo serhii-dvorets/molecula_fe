@@ -1,12 +1,12 @@
 import React from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
-import { TableTariff } from './types';
+import { TableItem } from './types';
 import { ModalName } from '@/lib/features/modals/types';
 
-const columnHelper = createColumnHelper<TableTariff>();
+const columnHelper = createColumnHelper<TableItem>();
 
 type Props = {
-	onOpenModal: (modelName: ModalName, data: TableTariff) => void;
+	onOpenModal: (modelName: ModalName, data: TableItem) => void;
 }
 
 export function getColumns({ onOpenModal }: Props) {

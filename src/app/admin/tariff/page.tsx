@@ -6,11 +6,12 @@ import { TariffsTable } from "@/components";
 import isOpenFor from "@/components/hoc/isOpenFor";
 import { ROLES } from "@/lib/constants/roles";
 import { useGetTariffs } from "@/lib/features/tariff/hooks/useGetTariffs";
-import { openModal, tariffDeleteModalSelectors, tariffUpdateModalSelectors } from "@/lib/store/slices/modalSlice";
-import { userSelectors } from "@/lib/store/slices/userSlice";
+import { openModal } from "@/lib/store/slices/modalSlice";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { tariffDeleteModalSelectors, tariffUpdateModalSelectors } from "@/lib/store/selectors/modalSelectors";
+import { userSelectors } from "@/lib/store/selectors/userSelectors";
 
 function AdminTariffPage() {
 	const dispatch = useDispatch()
@@ -19,15 +20,15 @@ function AdminTariffPage() {
 	const updateRefetch = useSelector(tariffUpdateModalSelectors.refetch)
 	const deleteRefetch = useSelector(tariffDeleteModalSelectors.refetch)
 
-	const [stations, setStations] = useState<Tariff[] | []>([])
+	const [tariffs, setTariffs] = useState<Tariff[] | []>([])
 
 	useEffect(() => {
-		fetchStations()
+		fetchTariffs()
 	}, [updateRefetch, deleteRefetch])
 
-	const fetchStations = async () => {
+	const fetchTariffs = async () => {
 		const data = await handleGetAllTariffs.mutateAsync()
-		if (data) setStations(data)
+		if (data) setTariffs(data)
 	}
 
 	const handleCreateTariff = () => {
@@ -45,7 +46,7 @@ function AdminTariffPage() {
 					<Link href={'/'} className="p-2 border bg-slate-300">home</Link>
 					<button onClick={handleCreateTariff} className="p-2 border bg-slate-300">Додати тариф +</button>
 				</div>
-				<TariffsTable tariffs={stations} />
+				<TariffsTable tariffs={tariffs} />
 				<TariffUpdateModal />
 				<TariffDeleteModal />
 			</SideBar>

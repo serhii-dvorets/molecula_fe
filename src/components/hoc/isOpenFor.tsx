@@ -1,6 +1,6 @@
 'use client';
 
-import { userSelectors } from "@/lib/store/slices/userSlice";
+import { userSelectors } from "@/lib/store/selectors/userSelectors";
 import { redirect } from "next/navigation";
 import { useSelector } from "react-redux";
 

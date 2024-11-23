@@ -3,7 +3,8 @@ import FormContainer from "@/components/forms/FormContainer";
 import { Input } from "@/components/inputs";
 import { Modal } from "@/components/modal";
 import { useManageTariff } from "@/lib/features/tariff/hooks/useManageTariff";
-import { clearModalErrors, closeModal, tariffUpdateModalSelectors } from "@/lib/store/slices/modalSlice";
+import { tariffUpdateModalSelectors } from "@/lib/store/selectors/modalSelectors";
+import { clearModalErrors, closeModal } from "@/lib/store/slices/modalSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

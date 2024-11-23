@@ -1,15 +1,30 @@
 export type ModalData =
 | { type: 'tariffUpdateModal', id?: string, name: string, unitOfMeasurement: string, pricePerUnit: string}
 | { type: 'tariffDeleteModal', id: string }
+| { type: 'userDeleteModal', id: string }
 | UserUpdateModalType
-| { type: 'userDeleteModal', id: string };
-
+| OrderCreateModalType
+| OrderUpdateModalType
 
 export type ModalName = 
 | 'tariffUpdateModal'
 | 'tariffDeleteModal'
 | 'userUpdateModal'
-| 'userDeleteModal';
+| 'userDeleteModal'
+| 'orderCreateModal'
+| 'orderUpdateModal';
+
+export type OrderCreateModalType = {
+    id?: string;
+    type: 'orderCreateModal',
+    customer: string
+}
+
+export type OrderUpdateModalType = {
+    id: string;
+    type: 'orderUpdateModal',
+    customer: string
+}
 
 export type UserCreateModalType = {
     type: 'userUpdateModal',

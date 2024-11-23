@@ -1,4 +1,4 @@
-export type TableTariff = {
+export type TableItem = {
   id: string;
   name: string;
   unitOfMeasurement: string;

@@ -3,7 +3,6 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { ModalData, ModalName } from '@/lib/features/modals/types'
 import { ValidationException } from '@/lib/exception/types';
 import { formatException } from '@/lib/exception/utils';
-import { RootState } from '../store';
 
 export type ModalState = {
   [modalName: string]: {
@@ -50,28 +49,6 @@ export const modalSlice = createSlice({
 		}
 	},
 })
-
-export const tariffUpdateModalSelectors = {
-	state: (state: RootState) => state.modal?.tariffUpdateModal,
-	refetch: (state: RootState) => state.modal?.tariffUpdateModal?.refetch,
-	errors: (state: RootState) => state.modal?.tariffUpdateModal?.errors
-};
-
-export const tariffDeleteModalSelectors = {
-	state: (state: RootState) => state.modal?.tariffDeleteModal,
-	refetch: (state: RootState) => state.modal?.tariffDeleteModal?.refetch,
-};
-
-export const userUpdateModalSelectors = {
-	state: (state: RootState) => state.modal?.userUpdateModal,
-	refetch: (state: RootState) => state.modal?.userUpdateModal?.refetch,
-	errors: (state: RootState) => state.modal?.userUpdateModal?.errors
-};
-
-export const userDeleteModalSelectors = {
-	state: (state: RootState) => state.modal?.userDeleteModal,
-	refetch: (state: RootState) => state.modal?.userDeleteModal?.refetch,
-};
 
 export const { openModal, closeModal, setModalErrors, clearModalErrors } = modalSlice.actions
 

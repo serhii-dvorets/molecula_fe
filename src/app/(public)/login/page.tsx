@@ -5,7 +5,8 @@ import ActionButton from "@/components/buttons/ActionButton/ActionButton";
 import FormContainer from "@/components/forms/FormContainer";
 import Typography from "@/components/typography/Typography";
 import { useLogIn } from "@/lib/features/user/hooks/useLogIn";
-import { clearUserErrors, userSelectors } from "@/lib/store/slices/userSlice";
+import { userSelectors } from "@/lib/store/selectors/userSelectors";
+import { clearUserErrors } from "@/lib/store/slices/userSlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

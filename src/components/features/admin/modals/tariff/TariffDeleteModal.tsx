@@ -1,6 +1,7 @@
 import { ConfirmModal } from "@/components/modal";
 import { useDeleteTariff } from "@/lib/features/tariff/hooks/useDeleteTariff";
-import { closeModal, tariffDeleteModalSelectors } from "@/lib/store/slices/modalSlice";
+import { tariffDeleteModalSelectors } from "@/lib/store/selectors/modalSelectors";
+import { closeModal } from "@/lib/store/slices/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export function TariffDeleteModal() {

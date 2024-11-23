@@ -1,36 +1,32 @@
 import { Table } from "@/components/tables/table";
 import { TableItem } from "./types";
-import { getColumns } from "./StuffColDef";
+import { getColumns } from "./OrdersColDef";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/lib/store/slices/modalSlice";
 import { ModalName } from "@/lib/features/modals/types";
-import { User } from "@/api/User/types";
-import { dumpUserForModal } from "@/api/User/userDump";
+import { Order } from "@/api/Order/types";
 
-type Props = { data: User[] | []; totalCount: number; }
+type Props = { data: Order[] | []; totalCount: number; }
 
-export function StuffTable({ data: users }: Props) {
+export function OrdersTable({ data }: Props) {
 	const dispatch = useDispatch()
-	const tableData: TableItem[] = users.map((user) => {
+	const tableData: TableItem[] = data.map((order) => {
 		return {
-			id: user.id,
-			name: user.name,
-			role: user.role.name,
-			phoneNumber: user.phoneNumber,
+			id: order.id,
+			customer: order.customer.name,
 			update: 'Змінити',
-			delete: 'Видалити',
 		};
 	});
 
-	const handleOpenModal = (modalName: ModalName, data: TableItem) => {
-		const userData = users.find(user => user.id === data.id)
+	const handleOpenModal = (modalName: ModalName, item: TableItem) => {
+		const orderData = data.find(user => user.id === item.id)
 		
 		dispatch(openModal({
 			modalName,
 			data: {
-				type: 'userUpdateModal',
-				id: data.id,
-				...dumpUserForModal(userData)
+				type: 'orderUpdateModal',
+				id: item.id,
+				customer: orderData?.customer.name || ''
 			}
 		}))
 	}

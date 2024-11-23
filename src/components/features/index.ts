@@ -4,5 +4,6 @@ export {
 	RoleSelect,
 	TariffsTable,
 	StuffTable,
-	CustomersTable
+	CustomersTable,
+	OrdersTable,
 } from './admin'

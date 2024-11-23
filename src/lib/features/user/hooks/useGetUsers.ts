@@ -2,7 +2,8 @@ import apiSingleton from "@/api/ApiFactory";
 import { useMutation } from "@tanstack/react-query";
 
 type GetAllUsersParams = {
-	roles: string[]
+	roles?: string[],
+	phoneNumber?: string
 }
 
 export function useGetUsers() {

@@ -1,7 +1,5 @@
 export type TableItem = {
   id: string;
-  name: string;
-  phoneNumber: string;
+  customer: string;
   update: string;
-  delete: string;
 }

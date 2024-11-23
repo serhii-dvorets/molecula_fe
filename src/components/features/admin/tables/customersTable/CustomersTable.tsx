@@ -1,5 +1,5 @@
 import { Table } from "@/components/tables/table";
-import { TableUser } from "./types";
+import { TableItem } from "./types";
 import { getColumns } from "./CustomersColDef";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/lib/store/slices/modalSlice";
@@ -11,7 +11,7 @@ type Props = { data: User[] | []; totalCount: number; }
 
 export function CustomersTable({ data: users }: Props) {
 	const dispatch = useDispatch()
-	const tableData: TableUser[] = users.map((user) => {
+	const tableData: TableItem[] = users.map((user) => {
 		return {
 			id: user.id,
 			name: user.name,
@@ -21,7 +21,7 @@ export function CustomersTable({ data: users }: Props) {
 		};
 	});
 
-	const handleOpenModal = (modalName: ModalName, data: TableUser) => {
+	const handleOpenModal = (modalName: ModalName, data: TableItem) => {
 		const userData = users.find(user => user.id === data.id)
 		
 		dispatch(openModal({
@@ -39,7 +39,7 @@ export function CustomersTable({ data: users }: Props) {
 	return (
 		<>
 			{tableData && (
-				<Table<TableUser>
+				<Table<TableItem>
 					data={tableData}
 					columns={columns}
 					emptyMessage={
