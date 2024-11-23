@@ -1,5 +1,5 @@
 import { UserCreateModalType, UserUpdateModalType } from "@/lib/features/modals/types";
-import { CreateUserBody, UpdateUserBody } from "./types";
+import { CreateUserBody, UpdateUserBody, User } from "./types";
 
 export const dumpCreateUser = (data: Omit<UserCreateModalType, 'type'>): CreateUserBody => {
 	return {
@@ -33,5 +33,20 @@ export const dumpUpdateUser = (data: Omit<UserUpdateModalType, 'type'>): UpdateU
 			entrance: data?.entrance,
 			notes: data?.notes,
 		}
+	}
+}
+
+export const dumpUserForModal = (data: User | undefined) => {
+	return {
+		name: data?.name,
+		phoneNumber: data?.phoneNumber,
+		notes: data?.notes,
+		city: data?.address?.city,
+		street: data?.address?.street,
+		building: data?.address?.building,
+		flat: data?.address?.flat,
+		entrance: data?.address?.entrance,
+		addressNotes: data?.address?.notes,
+		role: data?.role.name
 	}
 }

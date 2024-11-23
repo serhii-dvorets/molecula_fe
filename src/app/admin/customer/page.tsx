@@ -2,7 +2,7 @@
 import { User } from "@/api/User/types";
 import { SideBar } from "@/components";
 import { UserDeleteModal, UserUpdateModal } from "@/components/features/admin/modals";
-import { UsersTable } from "@/components/features/admin/tables/usersTable";
+import { CustomersTable } from "@/components";
 import isOpenFor from "@/components/hoc/isOpenFor";
 import { ROLES } from "@/lib/constants/roles";
 import { useGetUsers } from "@/lib/features/user/hooks/useGetUsers";
@@ -19,15 +19,15 @@ function AdminCustomerPage() {
 	const updateRefetch = useSelector(userUpdateModalSelectors.refetch)
 	const deleteRefetch = useSelector(userDeleteModalSelectors.refetch)
 
-	const [users, setUsers] = useState<User[] | []>([])
+	const [usersData, setUsersData] = useState<{totalCount: number, data: User[] | []}>()
 
 	useEffect(() => {
 		fetchUsers()
 	}, [updateRefetch, deleteRefetch])
 
 	const fetchUsers = async () => {
-		const data = await handleGetAllUsers.mutateAsync()
-		if (data) setUsers(data)
+		const data = await handleGetAllUsers.mutateAsync({ roles: [ROLES.CUSTOMER] })
+		if (data) setUsersData(data)
 	}
 
 	const handleCreateUser = () => {
@@ -37,15 +37,15 @@ function AdminCustomerPage() {
 	return (
 		<div className="">
 			<SideBar>
-				СТОРІНКА КЛІЄНТІВ
+				СТОРІНКА ЗАМОВНИКІВ
 				{userProfile && (
 					<div>Привіт, {userProfile.name}! Бачимо що ти залогінився!</div>
 				)}
 				<div className="flex gap-4 p-4">
-					<Link href={'/'} className="p-2 border bg-slate-300">home</Link>
-					<button onClick={handleCreateUser} className="p-2 border bg-slate-300">Додати користувача +</button>
+					<Link href={'/'} className="p-2 border bg-slate-300">На головну</Link>
+					<button onClick={handleCreateUser} className="p-2 border bg-slate-300">Додати замовника +</button>
 				</div>
-				<UsersTable users={users} />
+				{usersData?.data && <CustomersTable data={usersData?.data} totalCount={usersData?.totalCount}/>}
 				<UserUpdateModal />
 				<UserDeleteModal />
 			</SideBar>
@@ -53,5 +53,5 @@ function AdminCustomerPage() {
 	);
 }
 
-export default isOpenFor(AdminCustomerPage, [ROLES.ADMIN, ROLES.SUPER_ADMIN])
+export default isOpenFor(AdminCustomerPage, [ROLES.ADMIN, ROLES.SUPER_ADMIN, ROLES.EMPLOYEE, ROLES.MANAGER])
 

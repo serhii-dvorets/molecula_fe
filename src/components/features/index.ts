@@ -1,1 +1,8 @@
-export { SideBar, TariffUpdateModal, RoleSelect } from './admin'
+export {
+	SideBar,
+	TariffUpdateModal,
+	RoleSelect,
+	TariffsTable,
+	StuffTable,
+	CustomersTable
+} from './admin'

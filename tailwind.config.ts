@@ -29,6 +29,11 @@ export default {
 				'body-large': ['16px', { lineHeight: '24px', fontWeight: '400' }],
 				'body-small': ['14px', { lineHeight: '20px', fontWeight: '400' }],
 			},
+			animation: {
+				spin: 'spin 1s linear infinite',
+				'spin-slower': 'spin 2s linear infinite',
+				'spin-slowest': 'spin 3s linear infinite',
+			},
 		},
 	},
 	plugins: [],

@@ -10,8 +10,8 @@ export class UserClient extends Base {
 		return this.client.patch({ url: `/user/${id}`, body })
 	}
 
-	async getAll(): Promise<User[] | []> {
-		return this.client.get('/user')
+	async getAll(queryParams: any): Promise<{totalCount: number, data: User[] | []}> {
+		return this.client.get('/user', queryParams)
 	}
 
 	async getOne(id: string): Promise<User> {

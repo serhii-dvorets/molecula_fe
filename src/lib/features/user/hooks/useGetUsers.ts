@@ -1,6 +1,10 @@
 import apiSingleton from "@/api/ApiFactory";
 import { useMutation } from "@tanstack/react-query";
 
+type GetAllUsersParams = {
+	roles: string[]
+}
+
 export function useGetUsers() {
 	return {
 		handleGetOneUser: useMutation({
@@ -16,7 +20,7 @@ export function useGetUsers() {
 			}
 		}),
 		handleGetAllUsers: useMutation({
-			mutationFn: () => apiSingleton.user.getAll(),
+			mutationFn: (params: GetAllUsersParams) => apiSingleton.user.getAll(params),
 			onSuccess(data) {
 				return data
 			},

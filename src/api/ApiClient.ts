@@ -1,4 +1,8 @@
+import { setLoading } from '@/lib/store/slices/loadingSlice';
+import { store } from '@/lib/store/store';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { redirect } from 'next/navigation';
+import qs from 'qs';
 
 export type RequestParams = {
 	method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE', 
@@ -24,17 +28,25 @@ class ApiClient {
 	}
 
 	#addInterceptors() {
+		this.instance.interceptors.request.use((config) => {
+			store.dispatch(setLoading(true));
+			return config;
+		});
+
 		this.instance.interceptors.response.use(
 			(response) => {
+				store.dispatch(setLoading(false));
 				return response;
 			},
 			(error) => {
+				store.dispatch(setLoading(false));
+				
 				if (error.response.status === 400) {
 					return Promise.reject(error.response.data)
 				}
-
-				if (error.response.status === 401) {
-					console.log('Unauthorized access - logging out');
+				
+				if ([401, 403].includes(error.response.status)) {
+					redirect('/login')
 				}
 
 				return Promise.reject(error);
@@ -48,13 +60,20 @@ class ApiClient {
 			method,
 			params,
 			data: body,
+			paramsSerializer: params => {
+				return qs.stringify(params)
+			},	
 		});
 
 		return response.data;
 	}
 
 	get(endpoint: string, params?: AxiosRequestConfig) {
-		return this.#request({ url: endpoint, method: "GET", params });
+		return this.#request({
+			url: endpoint,
+			method: "GET",
+			params
+		});
 	}
 
 	post({ url, body = {}, params = {} }: Omit<RequestParams, 'method'>) {

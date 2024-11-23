@@ -19,7 +19,13 @@ export function getColumns({ onOpenModal }: Props) {
 		}),
 		columnHelper.accessor('phoneNumber', {
 			enableSorting: false,
-			header: () => <span className="whitespace-nowrap">{"Адреса"}</span>,
+			header: () => <span className="whitespace-nowrap">{"Телефон"}</span>,
+			cell: (info) => <span className="capitalize text-black-soft">{info.getValue()}</span>,
+			footer: (info) => info.column.id,
+		}),
+		columnHelper.accessor('role', {
+			enableSorting: false,
+			header: () => <span className="whitespace-nowrap">{"Посада"}</span>,
 			cell: (info) => <span className="capitalize text-black-soft">{info.getValue()}</span>,
 			footer: (info) => info.column.id,
 		}),

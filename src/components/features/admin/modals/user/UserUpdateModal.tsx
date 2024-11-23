@@ -32,9 +32,6 @@ export function UserUpdateModal() {
 	const modalState = useSelector(userUpdateModalSelectors.state)
 	const errors = useSelector(userUpdateModalSelectors.errors)
 
-	console.log(modalState);
-	
-
 	const userRole = useSelector(userSelectors.role)
 	const isSuperAdmin = userRole === 'superadmin'
 
@@ -68,9 +65,6 @@ export function UserUpdateModal() {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
 
-		console.log({ name, value });
-		
-		
 		setFormData((prevData) => ({ ...prevData, [name]: value }));
 		dispatch(clearModalErrors(modalName))
 	};
@@ -93,7 +87,7 @@ export function UserUpdateModal() {
 
 	return (
 		<div>
-			<Modal  className="w-[800px] max-w-[80vw]" isOpen={isOpen} onClose={handleClose} title={isUpdateModal ? 'Змінити користувача' : 'Створити користувача'}>
+			<Modal  className="w-[1000px] max-w-[80vw]" isOpen={isOpen} onClose={handleClose} title={isUpdateModal ? 'Змінити користувача' : 'Створити користувача'}>
 				<FormContainer onSubmit={handleSubmit} className="w-full" shadow="">
 					<div className="flex gap-5 justify-between">
 						<div className="flex flex-col gap-5 w-full">
