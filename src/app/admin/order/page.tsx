@@ -10,13 +10,15 @@ import { useGetOrders } from "@/lib/features/order/hooks/useGetOrders";
 import { Order } from "@/api/Order/types";
 import { tariffUpdateModalSelectors } from "@/lib/store/selectors/modalSelectors";
 import { userSelectors } from "@/lib/store/selectors/userSelectors";
-import { OrderCreateModal } from "@/components/features/admin";
+import { OrderCreateModal, UserUpdateModal } from "@/components/features/admin";
+import { User } from "@/api/User/types";
 
 function AdminOrderPage() {
 	const dispatch = useDispatch()
 	const { handleGetAllOrders } = useGetOrders()
 	const userProfile = useSelector(userSelectors.user)
 	const updateRefetch = useSelector(tariffUpdateModalSelectors.refetch)
+	const [createdUser, setCreatedUser] = useState<User>()
 
 	const [ordersData, setOrdersData] = useState<{totalCount: number, data: Order[] | []}>()
 
@@ -32,6 +34,14 @@ function AdminOrderPage() {
 	const handleAddOrder = () => {
 		dispatch(openModal({ modalName: 'orderCreateModal', data: null }))
 	}
+	
+	const handleCreateUser = () => {
+		dispatch(openModal({ modalName: 'userUpdateModal', data: null }))
+	}
+
+	const handleSetCreatedUser = (user: User) => {
+		setCreatedUser(user)
+	}
 
 	return (
 		<div className="">
@@ -45,7 +55,8 @@ function AdminOrderPage() {
 					<button onClick={handleAddOrder} className="p-2 border bg-slate-300">Створити замовлення +</button>
 				</div>
 				{ordersData?.data && <OrdersTable data={ordersData.data} totalCount={ordersData.totalCount} />}
-				<OrderCreateModal />
+				<OrderCreateModal handleCreateUser={handleCreateUser} createdUser={createdUser} setCreatedUser={setCreatedUser} />
+				<UserUpdateModal setCreatedUser={handleSetCreatedUser}/>
 			</SideBar>
 		</div>
 	);

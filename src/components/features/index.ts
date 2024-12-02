@@ -6,4 +6,5 @@ export {
 	StuffTable,
 	CustomersTable,
 	OrdersTable,
+	OrderItemTypeSelect
 } from './admin'

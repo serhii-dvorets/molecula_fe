@@ -19,7 +19,7 @@ export const Input = ({
 	onChange,
 	placeholder,
 	required = false,
-	className = ''
+	className = '',
 }: InputProps) => {
 	return (
 		<div className={`flex flex-col ${className}`}>

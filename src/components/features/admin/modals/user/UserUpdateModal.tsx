@@ -10,8 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RoleSelect } from "@/components";
 import { userUpdateModalSelectors } from "@/lib/store/selectors/modalSelectors";
 import { userSelectors } from "@/lib/store/selectors/userSelectors";
+import { User } from "@/api/User/types";
 
-export function UserUpdateModal() {
+type Props = {
+	setCreatedUser?: (data: User) => void;
+}
+
+export function UserUpdateModal({setCreatedUser}: Props) {
 	const modalName="userUpdateModal"
 
 	const initialData = {
@@ -70,7 +75,7 @@ export function UserUpdateModal() {
 		dispatch(clearModalErrors(modalName))
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (isUpdateModal && modalState?.data?.id) {
 			const updatedData = {
@@ -82,7 +87,8 @@ export function UserUpdateModal() {
 			const createData = {
 				...formData,
 			}
-			handleCreateUser.mutateAsync(dumpCreateUser(createData))
+			const createdUser = await handleCreateUser.mutateAsync(dumpCreateUser(createData))
+			if (createdUser && setCreatedUser) setCreatedUser(createdUser)
 		}
 	};
 

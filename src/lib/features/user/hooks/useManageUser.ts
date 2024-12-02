@@ -11,9 +11,11 @@ export function useManageUser() {
 	return {
 		handleCreateUser: useMutation({
 			mutationFn: (data: CreateUserBody) => apiSingleton.user.create(data),
-			onSuccess: () =>  {
+			onSuccess: (data) =>  {
 				showToast('success', 'Користувач успішно створений')
 				dispatch(closeModal('userUpdateModal'))
+
+				return data
 			},
 			onError: (error: any) => {
 				if (error?.message) {

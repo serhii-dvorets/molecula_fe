@@ -6,5 +6,5 @@ export {
 	UserDeleteModal,
 	OrderCreateModal
 } from './modals'
-export { RoleSelect } from './selects'
+export { RoleSelect, OrderItemTypeSelect } from './selects'
 export { TariffsTable, StuffTable, CustomersTable, OrdersTable } from './tables'
