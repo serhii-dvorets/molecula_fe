@@ -16,7 +16,7 @@ type Props = {
 	setCreatedUser?: (data: User) => void;
 }
 
-export function UserUpdateModal({setCreatedUser}: Props) {
+export function UserUpdateModal({ setCreatedUser }: Props) {
 	const modalName="userUpdateModal"
 
 	const initialData = {
@@ -90,6 +90,7 @@ export function UserUpdateModal({setCreatedUser}: Props) {
 			const createdUser = await handleCreateUser.mutateAsync(dumpCreateUser(createData))
 			if (createdUser && setCreatedUser) setCreatedUser(createdUser)
 		}
+		handleClose()
 	};
 
 	return (

@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetOrders } from "@/lib/features/order/hooks/useGetOrders";
 import { Order } from "@/api/Order/types";
-import { tariffUpdateModalSelectors } from "@/lib/store/selectors/modalSelectors";
+import { orderCreateModalSelectors } from "@/lib/store/selectors/modalSelectors";
 import { userSelectors } from "@/lib/store/selectors/userSelectors";
 import { OrderCreateModal, UserUpdateModal } from "@/components/features/admin";
 import { User } from "@/api/User/types";
@@ -17,7 +17,7 @@ function AdminOrderPage() {
 	const dispatch = useDispatch()
 	const { handleGetAllOrders } = useGetOrders()
 	const userProfile = useSelector(userSelectors.user)
-	const updateRefetch = useSelector(tariffUpdateModalSelectors.refetch)
+	const updateRefetch = useSelector(orderCreateModalSelectors.refetch)
 	const [createdUser, setCreatedUser] = useState<User>()
 
 	const [ordersData, setOrdersData] = useState<{totalCount: number, data: Order[] | []}>()

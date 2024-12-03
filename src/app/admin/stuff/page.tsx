@@ -6,11 +6,12 @@ import { StuffTable } from "@/components";
 import isOpenFor from "@/components/hoc/isOpenFor";
 import { ROLES } from "@/lib/constants/roles";
 import { useGetUsers } from "@/lib/features/user/hooks/useGetUsers";
-import { openModal, userDeleteModalSelectors, userUpdateModalSelectors } from "@/lib/store/slices/modalSlice";
-import { userSelectors } from "@/lib/store/slices/userSlice";
+import { openModal } from "@/lib/store/slices/modalSlice";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { userSelectors } from "@/lib/store/selectors/userSelectors";
+import { userDeleteModalSelectors, userUpdateModalSelectors } from "@/lib/store/selectors/modalSelectors";
 
 function AdminStaffPage() {
 	const dispatch = useDispatch()

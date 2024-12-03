@@ -41,7 +41,7 @@ export function OrdersTable({ data }: Props) {
 					columns={columns}
 					emptyMessage={
 						<div className="flex w-full flex-col items-center justify-center rounded-b-2xl bg-white p-[80px]">
-							<p className="mb-[24px] text-h4 font-semibold text-grey-900">Жодного замовника поки що не додано</p>
+							<p className="mb-[24px] text-h4 font-semibold text-grey-900">Жодного замовлення поки що не додано</p>
 						</div>
 					}
 				/>

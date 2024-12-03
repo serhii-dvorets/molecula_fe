@@ -74,6 +74,10 @@ export function OrderCreateModal({ handleCreateUser, setCreatedUser, createdUser
 		}
 	};
 
+	const handleResetQuery = () => {
+		setQuery('')
+	}
+
 	const updateOrder = async () => {
 		if (selectedUser?.id && createdOrder?.id) {
 			const data = await apiSingleton.order.update(createdOrder.id, {
@@ -95,10 +99,15 @@ export function OrderCreateModal({ handleCreateUser, setCreatedUser, createdUser
 
 	useEffect(() => {
 		setSelectedUser(createdUser);
-		if (createdUser?.phoneNumber) {
-			setQuery(createdUser.phoneNumber);
-		}
 	}, [createdUser]);
+
+	const fetchUsers = async () => {
+		const fetchedUsers = await handleGetAllUsers.mutateAsync({ roles: [ROLES.CUSTOMER], phoneNumber: query });
+		if (fetchedUsers) {
+			setUsers(fetchedUsers.data);
+			setSelectedUser(fetchedUsers.data.find(user => user.phoneNumber === query));
+		}
+	};
 
 	useEffect(() => {
 		fetchUsers();
@@ -112,13 +121,6 @@ export function OrderCreateModal({ handleCreateUser, setCreatedUser, createdUser
 		}
 	}, [selectedUser]);
 
-	const fetchUsers = async () => {
-		const fetchedUsers = await handleGetAllUsers.mutateAsync({ roles: [ROLES.CUSTOMER], phoneNumber: query });
-		if (fetchedUsers) {
-			setUsers(fetchedUsers.data);
-			setSelectedUser(fetchedUsers.data.find(user => user.phoneNumber === query));
-		}
-	};
 
 	const handleDeleteUnfinishedOrder = async () => {
 		if (createdOrder?.id) {
@@ -161,15 +163,15 @@ export function OrderCreateModal({ handleCreateUser, setCreatedUser, createdUser
 	}
 
 	const handleCurrentItemChange = (name: string, value: string) => {
-		console.log({ name, value });
+		if (['quantity', 'price'].includes(name) && !+value) return
 		
 		const fieldsToUpdate = {
 			[name]: value
 		}
 
-		if (name === 'quantity' && currentOrderItem.price) {
+		if (name === 'quantity') {
 			const tariffPerUnit = Number(currentOrderItem.price) / Number(currentOrderItem.quantity)
-			
+
 			Object.assign(fieldsToUpdate, { price: +value * tariffPerUnit })
 		}
 
@@ -211,6 +213,11 @@ export function OrderCreateModal({ handleCreateUser, setCreatedUser, createdUser
 
 			handleCreateOrder.mutateAsync(data)
 		}
+
+		dispatch(closeModal(modalName));
+		setCreatedUser(undefined);
+		setSelectedUser(undefined);
+		setCreatedOrder(undefined);
 	};
 
 	const renderItem = (item: OrderItem) => {
@@ -243,6 +250,7 @@ export function OrderCreateModal({ handleCreateUser, setCreatedUser, createdUser
 							options={userOptions}
 							onChange={setQuery}
 							placeholder={"Пошук замовника за телефоном"}
+							onClick={handleResetQuery}
 						/>
 						<ActionButton className="w-[250px] self-end" type='button' onClick={handleCreateUser}>Новий замовник</ActionButton>
 					</div>
@@ -357,7 +365,7 @@ export function OrderCreateModal({ handleCreateUser, setCreatedUser, createdUser
 				className="mt-6"
 				type="submit"
 				onClick={handleSubmit}
-				disabled={!selectedUser && !orderItems.length}
+				disabled={!selectedUser || !orderItems.length}
 			>
 					Зберегти замовлення
 			</ActionButton>

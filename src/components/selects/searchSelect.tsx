@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 type SearchInputProps = {
 	placeholder?: string;
 	onChange?: (value: string) => void;
+	onClick?: () => void;
 	options: { value: string; label: string }[];
 	className?: string;
 	label?: string;
@@ -12,6 +13,7 @@ type SearchInputProps = {
 export const SearchSelect: React.FC<SearchInputProps> = ({
 	placeholder = 'Пошук',
 	onChange = () => {},
+	onClick = () => {},
 	options = [],
 	className = '',
 	label = '',
@@ -61,6 +63,7 @@ export const SearchSelect: React.FC<SearchInputProps> = ({
 				<input
 					type="text"
 					value={searchTerm}
+					onClick={onClick}
 					onChange={handleInputChange}
 					placeholder={placeholder}
 					className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300"
