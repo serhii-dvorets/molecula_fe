@@ -4,7 +4,8 @@ export {
 	TariffDeleteModal,
 	UserUpdateModal,
 	UserDeleteModal,
-	OrderCreateModal
+	OrderCreateModal,
+	OrderUpdateModal
 } from './modals'
 export { RoleSelect, OrderItemTypeSelect } from './selects'
 export { TariffsTable, StuffTable, CustomersTable, OrdersTable } from './tables'

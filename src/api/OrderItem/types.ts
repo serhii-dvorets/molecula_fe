@@ -4,15 +4,31 @@ export type CreateOrderItemBody = {
 }
 
 export type UpdateOrderItemBody = {
-    customerId?: string;
-    status?: OrderItemStatus
-}
-
-export type OrderItem = {
-    type: OrderItemType;
+    id: string;
+    status?: OrderItemStatus;
+    type?: OrderItemType;
+    height?: string | null;
+    width?: string | null;
+    tariff?: string | null;
     quantity?: string;
     price?: string;
     name?: string;
+    createdAt?: Date
+    updatedAt?: Date
+}
+
+export type OrderItem = {
+    id?: string;
+    status?: OrderItemStatus;
+    type?: OrderItemType;
+    height?: string | null;
+    width?: string | null;
+    tariff?: string | null;
+    quantity?: string;
+    price?: string;
+    name?: string;
+    createdAt?: Date
+    updatedAt?: Date
 }
 
 type OrderItemStatus = 'pending' | 'accepted' | 'in-progress' | 'ready' | 'closed' | 'reopened'

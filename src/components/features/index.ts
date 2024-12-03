@@ -6,5 +6,6 @@ export {
 	StuffTable,
 	CustomersTable,
 	OrdersTable,
-	OrderItemTypeSelect
+	OrderItemTypeSelect,
+	OrderUpdateModal
 } from './admin'

@@ -1,7 +1,7 @@
 import Base from "../Base";
 import { UpdateOrderItemBody, CreateOrderItemBody, OrderItem } from "./types";
 
-export class OrderClient extends Base {
+export class OrderItemClient extends Base {
 	async create(body: CreateOrderItemBody): Promise<OrderItem> {
 		return this.client.post({ url: '/order-item', body })
 	}

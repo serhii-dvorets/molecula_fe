@@ -2,6 +2,7 @@ import React from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
 import { TableItem } from './types';
 import { ModalName } from '@/lib/features/modals/types';
+import { StatusBadge } from '@/components/statusBadge';
 
 const columnHelper = createColumnHelper<TableItem>();
 
@@ -14,6 +15,24 @@ export function getColumns({ onOpenModal }: Props) {
 		columnHelper.accessor('customer', {
 			enableSorting: false,
 			header: () => <span className="whitespace-nowrap">{'Назва'}</span>,
+			cell: (info) => <span className="capitalize text-black-soft">{info.getValue()}</span>,
+			footer: (info) => info.column.id,
+		}),
+		columnHelper.accessor('createdAt', {
+			enableSorting: false,
+			header: () => <span className="whitespace-nowrap">{'Дата створення'}</span>,
+			cell: (info) => <span className="capitalize text-black-soft">{info.getValue()}</span>,
+			footer: (info) => info.column.id,
+		}),
+		columnHelper.accessor('status', {
+			enableSorting: false,
+			header: () => <span className="whitespace-nowrap">{'Статус замовлення'}</span>,
+			cell: (info) => <StatusBadge status={info.getValue()} />,
+			footer: (info) => info.column.id,
+		}),
+		columnHelper.accessor('carpetsNumber', {
+			enableSorting: false,
+			header: () => <span className="whitespace-nowrap">{'Килимів'}</span>,
 			cell: (info) => <span className="capitalize text-black-soft">{info.getValue()}</span>,
 			footer: (info) => info.column.id,
 		}),

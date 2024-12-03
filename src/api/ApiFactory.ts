@@ -4,6 +4,7 @@ import { TariffClient } from "./Tariff"
 import { OrderClient } from "./Order"
 import { UserClient } from "./User"
 import { RoleClient } from "./Role"
+import { OrderItemClient } from "./OrderItem/OrderItem"
 
 class ApiFactory {
 	api
@@ -15,6 +16,7 @@ class ApiFactory {
 		return {
 			auth: new AuthClient(this.api),
 			order: new OrderClient(this.api),
+			orderItem: new OrderItemClient(this.api),
 			tariff: new TariffClient(this.api),
 			user: new UserClient(this.api),
 			role: new RoleClient(this.api),

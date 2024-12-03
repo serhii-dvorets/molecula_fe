@@ -4,7 +4,7 @@ import isOpenFor from "@/components/hoc/isOpenFor";
 import { ROLES } from "@/lib/constants/roles";
 import { openModal } from "@/lib/store/slices/modalSlice";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetOrders } from "@/lib/features/order/hooks/useGetOrders";
 import { Order } from "@/api/Order/types";
@@ -22,14 +22,18 @@ function AdminOrderPage() {
 
 	const [ordersData, setOrdersData] = useState<{totalCount: number, data: Order[] | []}>()
 
-	useEffect(() => {
-		fetchOrders()
-	}, [updateRefetch])
-
-	const fetchOrders = async () => {
+	const fetchOrders = useCallback(async () => {
 		const data = await handleGetAllOrders.mutateAsync()
 		if (data) setOrdersData(data)
-	}
+	}, [])
+
+	console.log(ordersData);
+	
+
+	useEffect(() => {
+		fetchOrders()
+	}, [updateRefetch, fetchOrders])
+
 
 	const handleAddOrder = () => {
 		dispatch(openModal({ modalName: 'orderCreateModal', data: null }))

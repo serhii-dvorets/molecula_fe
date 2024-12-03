@@ -18,6 +18,7 @@ import clsx from 'clsx';
 export const Table = <T extends object>(props: ReactTableProps<T>) => {
 	const { data, columns, sorting = [], onSortChange, emptyMessage } = props;
 	const [tableSorting, setTableSorting] = React.useState<SortingState>(sorting);
+	const onClickRow = props.onClickRow || function() {};
 
 	const updateSorting = (updater: Updater<SortingState>) => {
 		if (!('sorting' in props)) {
@@ -124,6 +125,7 @@ export const Table = <T extends object>(props: ReactTableProps<T>) => {
 						)}
 						style={{ animationDuration: `300ms` }}
 						key={row.id}
+						onClick={() => onClickRow(row.original)}
 					>
 						{row.getVisibleCells().map((cell, idx, arr) => {
 							const { _rowSpan: rowSpanData } = row.original as {

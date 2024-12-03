@@ -15,7 +15,16 @@ export type UpdateOrderBody = {
 
 export type Order = {
     id: string;
+    status: OrderStatus;
     customer: User;
+    deliveryDate: string | null;
+    pickupDate: string | null;
+    selfPickup: boolean;
+    items: OrderItem[];
+    createdAt: string;
+    updatedAt: string;
 }
 
 export type OrderStatus = 'pending' | 'accepted' | 'in-progress' | 'ready' | 'customer-notified' | 'closed' | 'reopened'
+
+
